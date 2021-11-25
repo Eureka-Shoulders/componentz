@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "lib": ["DOM", "ESNext"],
+    "jsx": "react-jsx",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "useDefineForClassFields": true,
+    "module": "esnext",
+    "rootDir": "src",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "types": ["jest"],
+    "baseUrl": "src",
+    "paths": {
+      "@containers/*": ["./containers/*"],
+      "@components": ["./components/index"],
+      "@components/*": ["./components/*"],
+      "@stores/*": ["./stores/*"],
+      "@hooks/*": ["./hooks/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["node_modules", "dist"]
+}
