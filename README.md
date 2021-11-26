@@ -11,28 +11,81 @@ The goal is not to replace the MUI, but to be an extension
 
 ## Installation
 
-Using npm:
+MUI is the base of this library so it is the first installation
 
 ```bash
-npm i @euk-labs/componentz
+# Using npm:
+npm install @mui/material @emotion/react @emotion/styled
+
+# Using yarn:
+yarn add @mui/material @emotion/react @emotion/styled
 ```
 
-Using yarn:
+For dependency injection we will use the inversify lib
 
 ```bash
-yarn add @euk-labs/componentz
+# Using npm:
+npm i inversify inversify-react
+# Using yarn:
+yarn add inversify inversify-react
+```
+
+For state management we will use MobX
+
+```bash
+# Using npm:
+npm i mobx mobx-react-lite
+
+# Using yarn:
+yarn add mobx mobx-react-lite
+```
+
+Finlay componentz
+
+```bash
+# Using npm:
+npm i mobx mobx-react-lite
+
+# Using yarn:
+yarn add mobx mobx-react-lite
 ```
 
 ### Dependencies
 
 - MUI: A UI library that serves as the basis for the project
 - MobX is used to generate Stores and Hooks powered by these stores to make a beautiful reactive way to control the data on your interfaces.
+- Inversify: dependency Injection library
 
 ## Usage
 
 We've separated the logical part of the component, which has the minimum responsibilities to be as generic as possible, so we use the Mobx state manager to make this component control.
 
 The complete documentation form components is being built, we will soon make it available.
+
+First add a Inversify provider and reflect metadata at the root of your project
+
+```ts
+import 'reflect-metadata';
+
+import { ThemeProvider } from '@mui/material/styles';
+import { CssBaseline } from '@mui/material';
+import { Provider } from 'inversify-react';
+import theme from 'styles/theme';
+
+function MyApp({ Component, pageProps }) {
+  return (
+    <Provider container={globalContainer}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </Provider>
+  );
+}
+
+export default MyApp;
+```
 
 A simple example of what a component's usage pattern looks like:
 
