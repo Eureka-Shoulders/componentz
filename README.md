@@ -9,52 +9,36 @@ Componentz is a MUI-based UI library that can provide simple and performatic way
 
 The goal is not to replace the MUI, but to be an extension
 
-## Installation
-
-MUI is the base of this library so it is the first installation
-
-```bash
-# Using npm:
-npm install @mui/material @emotion/react @emotion/styled
-
-# Using yarn:
-yarn add @mui/material @emotion/react @emotion/styled
-```
-
-For dependency injection we will use the inversify lib
-
-```bash
-# Using npm:
-npm i inversify inversify-react
-# Using yarn:
-yarn add inversify inversify-react
-```
-
-For state management we will use MobX
-
-```bash
-# Using npm:
-npm i mobx mobx-react-lite
-
-# Using yarn:
-yarn add mobx mobx-react-lite
-```
-
-Finally componentz
-
-```bash
-# Using npm:
-npm i mobx mobx-react-lite
-
-# Using yarn:
-yarn add mobx mobx-react-lite
-```
-
 ### Dependencies
 
 - MUI: A UI library that serves as the basis for the project
+  - You can learn more about MUI [here](mui.com/)
 - MobX is used to generate Stores and Hooks powered by these stores to make a beautiful reactive way to control the data on your interfaces.
+  - Meet this wonderfully lib [here](mobx.js.org/)
 - Inversify is fundamental for dependency injection strategies
+  - The strategy about this architecture can be known [here](https://github.com/inversify/InversifyJS)
+
+## Installation
+
+Our dependencies:
+
+```bash
+# Using npm:
+npm install @mui/material @emotion/react @emotion/styled inversify inversify-react mobx mobx-react-lite
+
+# Using yarn:
+yarn add @mui/material @emotion/react @emotion/styled inversify inversify-react mobx mobx-react-lite
+```
+
+Installing Componentz 🤩
+
+```bash
+# Using npm:
+npm i @euk-labs/componentz
+
+# Using yarn:
+yarn add @euk-labs/componentz
+```
 
 ## Usage
 
@@ -64,9 +48,11 @@ The complete documentation is under construction, we will soon make it available
 
 First add a Inversify provider and reflect-metadata at the root of your project
 
+_In this example we are using Next but the idea can be used for other React applications_
+
 ```ts
 import 'reflect-metadata';
-
+import { globalContainer } from '@euk-labs/componentz';
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 import { Provider } from 'inversify-react';
