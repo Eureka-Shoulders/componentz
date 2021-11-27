@@ -1,6 +1,6 @@
 import { AlertColor } from '@mui/material';
-import { SnackbarOptions, SnackbarStoreType } from '../types';
 import { makeAutoObservable } from 'mobx';
+import { SnackbarOptions, SnackbarStoreType } from '../types';
 
 // TODO: Make unit tests of this store
 class SnackbarStore implements SnackbarStoreType {

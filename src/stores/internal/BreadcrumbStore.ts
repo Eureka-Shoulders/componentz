@@ -1,7 +1,7 @@
-import { BreadcrumbPaths } from '../../components/Breadcrumb/types';
-import { BreadcrumbStoreType } from '../types';
 import { makeAutoObservable } from 'mobx';
 import * as R from 'ramda';
+import { BreadcrumbPaths } from '../../components/Breadcrumbs/types';
+import { BreadcrumbStoreType } from '../types';
 
 // TODO: Make unit tests of this store
 class BreadcrumbStore implements BreadcrumbStoreType {
