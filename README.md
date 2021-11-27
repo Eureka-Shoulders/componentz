@@ -58,7 +58,7 @@ yarn add mobx mobx-react-lite
 
 ## Usage
 
-We've separated the logical part of the component, which has the minimum responsibilities to be as generic as possible, so we use the Mobx state manager to make this component control.
+We've separated the logical part of the component, which has the minimum responsibilities to be as generic as possible, so we use Mobx for state management to make this happen.
 
 The complete documentation form components is being built, we will soon make it available.
 
