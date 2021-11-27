@@ -54,7 +54,7 @@ yarn add mobx mobx-react-lite
 
 - MUI: A UI library that serves as the basis for the project
 - MobX is used to generate Stores and Hooks powered by these stores to make a beautiful reactive way to control the data on your interfaces.
-- Inversify: dependency Injection library
+- Inversify is fundamental for dependency injection strategies
 
 ## Usage
 
