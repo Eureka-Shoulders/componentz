@@ -14,9 +14,9 @@ The goal is not to replace the MUI, but to be an extension
 - MUI: A UI library that serves as the basis for the project
   - You can learn more about MUI [here](mui.com/)
 - MobX is used to generate Stores and Hooks powered by these stores to make a beautiful reactive way to control the data on your interfaces.
-  - Meet this wonderfully lib [here](mobx.js.org/)
+  - Meet this wonderful lib [here](mobx.js.org/)
 - Inversify is fundamental for dependency injection strategies
-  - The strategy about this architecture can be known [here](https://github.com/inversify/InversifyJS)
+  - The strategy about this architecture can be found [here](https://github.com/inversify/InversifyJS)
 
 ## Installation
 
