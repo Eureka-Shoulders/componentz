@@ -1,4 +1,3 @@
-import useUIStore from '../../hooks/useUIStore';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { Backdrop } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -8,6 +7,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
+import useUIStore from '../../hooks/useUIStore';
 import { DialogProps } from './types';
 
 function Dialog({
@@ -21,14 +21,9 @@ function Dialog({
     <Backdrop
       sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
       open={uiStore.dialog.isOpen}
-      onClick={uiStore.dialog.onReject}
+      onClick={uiStore.dialog.close}
     >
-      <MuiDialog
-        {...rest}
-        open={uiStore.dialog.isOpen}
-        keepMounted
-        onClose={uiStore.dialog.onReject}
-      >
+      <MuiDialog {...rest} open={uiStore.dialog.isOpen} keepMounted>
         {uiStore.dialog.title ? (
           <DialogTitle>{uiStore.dialog.title}</DialogTitle>
         ) : null}
@@ -42,7 +37,7 @@ function Dialog({
           {uiStore.dialog.onAccept && (
             <LoadingButton
               loading={false}
-              onClick={uiStore.dialog.onReject}
+              onClick={uiStore.dialog.onAccept}
               color="primary"
               variant="contained"
             >

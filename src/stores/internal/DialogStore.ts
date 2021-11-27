@@ -1,6 +1,6 @@
-import { DialogOptions, DialogStoreType } from '../types';
 import { makeAutoObservable } from 'mobx';
 import { ReactNode } from 'react';
+import { DialogOptions, DialogStoreType } from '../types';
 
 // TODO: Make unit tests of this store
 class DialogStore implements DialogStoreType {

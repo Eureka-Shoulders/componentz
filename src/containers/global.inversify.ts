@@ -1,6 +1,6 @@
 import { Container } from 'inversify';
-import TYPES from './global.types';
 import UIStore from '../stores/UIStore';
+import TYPES from './global.types';
 
 export default function globalContainer() {
   const container = new Container();
