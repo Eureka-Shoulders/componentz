@@ -48,5 +48,5 @@ export const Custom = ({
     });
   }, [message, severity, actionLabel]);
 
-  return <Snackbar autoHideDuration={null} />;
+  return <Snackbar />;
 };
