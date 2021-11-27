@@ -5,7 +5,7 @@
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Eureka-Shoulders/componentz/CI)
 ![npm](https://img.shields.io/npm/dw/@euk-labs/componentz)
 
-Componentz is an MUI-based UI library that can provide simple and performative ways to use components.
+Componentz is a MUI-based UI library that can provide simple and performatic ways to use components.
 
 The goal is not to replace the MUI, but to be an extension
 
