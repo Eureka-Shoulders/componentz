@@ -62,7 +62,7 @@ We've separated the logical part of the component, which has the minimum respons
 
 The complete documentation is under construction, we will soon make it available.
 
-First add a Inversify provider and reflect metadata at the root of your project
+First add a Inversify provider and reflect-metadata at the root of your project
 
 ```ts
 import 'reflect-metadata';
