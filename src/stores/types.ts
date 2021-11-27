@@ -1,4 +1,4 @@
-import { BreadcrumbPaths } from '../components/Breadcrumbs/types';
+import { BreadcrumbPath } from '../components/Breadcrumbs/types';
 import { ReactNode } from 'react';
 
 export interface UIStoreType {
@@ -32,11 +32,11 @@ export interface DialogStoreType {
 }
 
 export interface BreadcrumbStoreType {
-  paths: BreadcrumbPaths[];
-  linkedPaths: BreadcrumbPaths[];
+  paths: BreadcrumbPath[];
+  linkedPaths: BreadcrumbPath[];
   finalPath: string | undefined;
 
-  setPaths(paths: BreadcrumbPaths[]): void;
+  setPaths(paths: BreadcrumbPath[]): void;
 }
 
 // Store Options

@@ -21,7 +21,7 @@ function Action({ label, ...rest }: ButtonProps) {
   );
 }
 
-function Snackbar({ autoHideDuration, ...rest }: SnackbarProps) {
+function Snackbar({ ...rest }: SnackbarProps) {
   const uiStore = useUIStore();
 
   if (uiStore.snackbar.severity) {
@@ -29,7 +29,6 @@ function Snackbar({ autoHideDuration, ...rest }: SnackbarProps) {
       <MuiSnackbar
         {...rest}
         open={uiStore.snackbar.isOpen}
-        autoHideDuration={autoHideDuration}
         onClose={uiStore.snackbar.close}
       >
         <Alert
@@ -54,7 +53,6 @@ function Snackbar({ autoHideDuration, ...rest }: SnackbarProps) {
     <MuiSnackbar
       {...rest}
       open={uiStore.snackbar.isOpen}
-      autoHideDuration={autoHideDuration}
       onClose={uiStore.snackbar.close}
       action={
         uiStore.snackbar.actionLabel && (

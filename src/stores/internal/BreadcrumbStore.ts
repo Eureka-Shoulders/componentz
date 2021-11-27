@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import * as R from 'ramda';
-import { BreadcrumbPaths } from '../../components/Breadcrumbs/types';
+import { BreadcrumbPath } from '../../components/Breadcrumbs/types';
 import { BreadcrumbStoreType } from '../types';
 
 // TODO: Make unit tests of this store
@@ -9,9 +9,9 @@ class BreadcrumbStore implements BreadcrumbStoreType {
     makeAutoObservable(this, {}, { autoBind: true });
   }
 
-  paths: BreadcrumbPaths[] = [];
+  paths: BreadcrumbPath[] = [];
 
-  setPaths(paths: BreadcrumbPaths[]) {
+  setPaths(paths: BreadcrumbPath[]) {
     this.paths = paths;
   }
 
