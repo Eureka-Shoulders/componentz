@@ -60,7 +60,7 @@ yarn add mobx mobx-react-lite
 
 We've separated the logical part of the component, which has the minimum responsibilities to be as generic as possible, so we use Mobx for state management to make this happen.
 
-The complete documentation form components is being built, we will soon make it available.
+The complete documentation is under construction, we will soon make it available.
 
 First add a Inversify provider and reflect metadata at the root of your project
 
