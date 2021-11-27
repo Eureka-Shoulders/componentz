@@ -40,7 +40,7 @@ npm i mobx mobx-react-lite
 yarn add mobx mobx-react-lite
 ```
 
-Finlay componentz
+Finally componentz
 
 ```bash
 # Using npm:
