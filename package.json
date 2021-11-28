@@ -100,7 +100,5 @@
     "react-dom": ">=17",
     "reflect-metadata": ">=0.1.13"
   },
-  "dependencies": {
-    "reflect-metadata": "^0.1.13"
-  }
+  "dependencies": {}
 }
