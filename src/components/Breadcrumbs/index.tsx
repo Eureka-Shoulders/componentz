@@ -24,7 +24,7 @@ function Breadcrumbs(props: BreadcrumbsProps) {
     <MuiBreadcrumbs {...props}>
       {uiStore.breadcrumb.linkedPaths.map((path) => (
         <Link
-          key={path.link}
+          key={path.label}
           underline="hover"
           color="inherit"
           href={path.link}
