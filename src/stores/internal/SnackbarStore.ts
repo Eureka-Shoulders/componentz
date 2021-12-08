@@ -42,9 +42,8 @@ class SnackbarStore implements SnackbarStoreType {
         this.show(nextSnackbar);
       }
     } else {
-      setTimeout(() => {
-        this.reset();
-      }, 500);
+      this.reset();
+      this.isOpen = false;
     }
   }
 

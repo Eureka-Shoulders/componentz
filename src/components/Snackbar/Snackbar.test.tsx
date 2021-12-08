@@ -1,5 +1,4 @@
 import 'reflect-metadata';
-
 import React from 'react';
 import {
   render,
@@ -27,6 +26,7 @@ describe('Snackbar', () => {
     onActionSpy = jest.fn();
     mockedSnackbar = render(
       <Provider container={unitContainer}>
+        <button data-testid="outButton">outButton</button>
         <Snackbar autoHideDuration={3000} />
       </Provider>
     );
@@ -60,97 +60,109 @@ describe('Snackbar', () => {
     expect(onActionSpy).toHaveBeenCalled();
   });
 
-  // it('should close alert snackbar after 3 seconds', async () => {
-  //   const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
+  it('should close alert snackbar after 3 seconds', async () => {
+    const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
 
-  //   uiStore.snackbar.show({
-  //     message: 'Hello World',
-  //     severity: 'success',
-  //   });
-  //   expect(await screen.findByText(/Hello World/i)).not.toBeNull();
-  //   await waitFor(
-  //     () => {
-  //       expect(getByTestId(mockedSnackbar.container, 'snackbar')).toBeNull();
-  //     },
-  //     { timeout: 3300 }
-  //   );
-  // });
+    uiStore.snackbar.show({
+      message: 'Hello World',
+      severity: 'success',
+    });
+    expect(await screen.findByText(/Hello World/i)).not.toBeNull();
+    await waitFor(
+      () => {
+        expect(screen.queryByTestId('snackbar')).toBeNull();
+      },
+      { timeout: 3300 }
+    );
+  });
 
-  // it('should close alert snackbar after click away', async () => {
-  //   const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
+  it('should close alert snackbar after click away', async () => {
+    const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
 
-  //   uiStore.snackbar.show({
-  //     message: 'Hello World',
-  //     severity: 'success',
-  //   });
+    uiStore.snackbar.show({
+      message: 'Hello World',
+      severity: 'success',
+    });
 
-  //   // click away and expect hide snackbar
+    getByTestId(mockedSnackbar.container, 'outButton').click();
+    await waitFor(
+      () => {
+        expect(screen.queryByTestId('snackbar')).toBeNull();
+      },
+      { timeout: 3300 }
+    );
+  });
 
-  //   getByTestId(mockedSnackbar.container, 'out-label').click();
-  //   expect(getByTestId(mockedSnackbar.container, 'snackbar')).toBeNull();
-  // });
+  it('should have a test button in alert snackbar', async () => {
+    const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
 
-  // it('should close alert snackbar after click on close button', async () => {
-  //   const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
+    function snackbarAction() {
+      uiStore.snackbar.close();
+    }
 
-  //   function closeSnackbar() {
-  //     uiStore.snackbar.close();
-  //   }
+    uiStore.snackbar.show({
+      message: 'Hello World',
+      severity: 'success',
+      actionLabel: 'Test',
+      onActionClick: snackbarAction,
+    });
 
-  //   uiStore.snackbar.show({
-  //     message: 'Hello World',
-  //     severity: 'success',
-  //     actionLabel: 'action label test',
-  //     onActionClick: closeSnackbar,
-  //   });
+    expect(getByTestId(mockedSnackbar.container, 'snackbar')).not.toBeNull();
+  });
 
-  //   expect(getByTestId(mockedSnackbar.container, 'snackbar')).toBeNull();
+  it('should close alert snackbar after click on close button', async () => {
+    const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
 
-  //   (await screen.findByText(/action label test/i)).click();
+    function closeSnackbar() {
+      uiStore.snackbar.close();
+    }
 
-  //   expect(getByTestId(mockedSnackbar.container, 'snackbar')).not.toBeNull();
-  // });
+    uiStore.snackbar.show({
+      message: 'Hello World',
+      severity: 'success',
+      actionLabel: 'action label test',
+      onActionClick: closeSnackbar,
+    });
 
-  // it('should have a test button in alert snackbar', async () => {
-  //   const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
+    expect(getByTestId(mockedSnackbar.container, 'snackbar')).not.toBeNull();
 
-  //   function snackbarAction() {
-  //     uiStore.snackbar.close();
-  //   }
+    (await screen.findByText(/action label test/i)).click();
 
-  //   uiStore.snackbar.show({
-  //     message: 'Hello World',
-  //     severity: 'success',
-  //     actionLabel: 'Test',
-  //     onActionClick: snackbarAction,
-  //   });
-  // });
+    await waitFor(() => {
+      expect(screen.queryByTestId('snackbar')).toBeNull();
+    });
+  });
 
-  // it('should exec a function on action click', async () => {
-  //   const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
+  it('should enqueue new snackbar', async () => {
+    const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
 
-  //   function snackbarAction() {
-  //     uiStore.snackbar.close();
-  //   }
+    uiStore.snackbar.show({
+      message: 'Hello World',
+      severity: 'success',
+    });
+    uiStore.snackbar.show({
+      message: "I'm a second snackbar",
+      severity: 'error',
+    });
+    uiStore.snackbar.show({
+      message: "I'm a third snackbar",
+      severity: 'warning',
+    });
 
-  //   uiStore.snackbar.show({
-  //     message: 'Hello World',
-  //     severity: 'success',
-  //     actionLabel: 'Test',
-  //     onActionClick: snackbarAction,
-  //   });
-  // });
+    expect(await screen.findByText(/Hello World/i)).not.toBeNull();
 
-  // it('should enqueue new snackbars', async () => {
-  //   const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
+    await waitFor(
+      () => {
+        expect(screen.findByText(/I'm a second snackbar/i)).not.toBeNull();
+      },
+      { timeout: 3500 }
+    );
 
-  //   uiStore.snackbar.show({
-  //     message: 'Hello World',
-  //     severity: 'success',
-  //   });
-  //   uiStore.snackbar.show({
-  //     message: "I'm a nice error :)",
-  //     severity: 'error',
-  //   });
-  // });
+    await waitFor(
+      () => {
+        expect(screen.findByText(/I'm a second snackbar/i)).not.toBeNull();
+      },
+      { timeout: 3500 }
+    );
+  });
 });
