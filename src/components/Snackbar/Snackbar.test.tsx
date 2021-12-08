@@ -14,6 +14,8 @@ import { Container } from 'inversify';
 import TYPES from '../../containers/global.types';
 import { UIStoreType } from '../../stores/types';
 
+jest.setTimeout(30000);
+
 describe('Snackbar', () => {
   let onActionSpy: jest.Mock;
   let mockedSnackbar: RenderResult;
@@ -25,7 +27,7 @@ describe('Snackbar', () => {
     onActionSpy = jest.fn();
     mockedSnackbar = render(
       <Provider container={unitContainer}>
-        <Snackbar />
+        <Snackbar autoHideDuration={3000} />
       </Provider>
     );
   });
@@ -58,7 +60,7 @@ describe('Snackbar', () => {
     expect(onActionSpy).toHaveBeenCalled();
   });
 
-  // it('should close alert snackbar after 6 seconds', async () => {
+  // it('should close alert snackbar after 3 seconds', async () => {
   //   const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
 
   //   uiStore.snackbar.show({
@@ -66,6 +68,12 @@ describe('Snackbar', () => {
   //     severity: 'success',
   //   });
   //   expect(await screen.findByText(/Hello World/i)).not.toBeNull();
+  //   await waitFor(
+  //     () => {
+  //       expect(getByTestId(mockedSnackbar.container, 'snackbar')).toBeNull();
+  //     },
+  //     { timeout: 3300 }
+  //   );
   // });
 
   // it('should close alert snackbar after click away', async () => {
@@ -75,15 +83,32 @@ describe('Snackbar', () => {
   //     message: 'Hello World',
   //     severity: 'success',
   //   });
+
+  //   // click away and expect hide snackbar
+
+  //   getByTestId(mockedSnackbar.container, 'out-label').click();
+  //   expect(getByTestId(mockedSnackbar.container, 'snackbar')).toBeNull();
   // });
 
   // it('should close alert snackbar after click on close button', async () => {
   //   const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
 
+  //   function closeSnackbar() {
+  //     uiStore.snackbar.close();
+  //   }
+
   //   uiStore.snackbar.show({
   //     message: 'Hello World',
   //     severity: 'success',
+  //     actionLabel: 'action label test',
+  //     onActionClick: closeSnackbar,
   //   });
+
+  //   expect(getByTestId(mockedSnackbar.container, 'snackbar')).toBeNull();
+
+  //   (await screen.findByText(/action label test/i)).click();
+
+  //   expect(getByTestId(mockedSnackbar.container, 'snackbar')).not.toBeNull();
   // });
 
   // it('should have a test button in alert snackbar', async () => {
