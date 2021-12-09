@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 
-import TYPES from '@containers/global.types';
+import TYPES from '../../containers/global.types';
 import { UIStoreType } from '@stores/types';
 import {
   getByTestId,

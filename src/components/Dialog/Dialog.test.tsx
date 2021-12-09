@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 
-import TYPES from '@containers/global.types';
+import TYPES from '../../containers/global.types';
 import { UIStoreType } from '@stores/types';
 import {
   getByTestId,
@@ -16,7 +16,6 @@ import React from 'react';
 describe('Dialog', () => {
   let onRejectSpy: jest.Mock;
   let onAcceptSpy: jest.Mock;
-  let mockedDialog: RenderResult;
   let unitContainer: Container;
 
   beforeEach(() => {
@@ -24,7 +23,7 @@ describe('Dialog', () => {
     onRejectSpy = jest.fn();
     unitContainer = globalContainer();
 
-    mockedDialog = render(
+    render(
       <Provider container={unitContainer}>
         <Dialog />
       </Provider>
@@ -41,7 +40,7 @@ describe('Dialog', () => {
       content: 'Test content',
     });
 
-    expect(getByTestId(mockedDialog.container, 'dialog')).not.toBeNull();
+    expect(screen.getByText(/Test content/i)).not.toBeNull();
   });
 
   it('should call onAccept function when the user clicks', async () => {
