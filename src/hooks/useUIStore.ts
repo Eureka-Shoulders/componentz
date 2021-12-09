@@ -3,7 +3,7 @@ import TYPES from '../containers/global.types';
 import { UIStoreType } from '../stores/types';
 
 /**
- * Hook to get the UIStore
+ * Hook to get the global instance of UIStore
  */
 
 export default function useUIStore(): UIStoreType {
