@@ -8,6 +8,8 @@ class SnackbarStore implements SnackbarStoreType {
     makeAutoObservable(this, {}, { autoBind: true });
   }
 
+  queue: SnackbarOptions[] = [];
+
   isOpen = false;
   message = '';
   severity?: AlertColor;
@@ -15,6 +17,15 @@ class SnackbarStore implements SnackbarStoreType {
   onActionClick?: () => void = undefined;
 
   show({ message, severity, actionLabel, onActionClick }: SnackbarOptions) {
+    if (this.isOpen) {
+      return this.enqueueSnackbar({
+        message,
+        severity,
+        actionLabel,
+        onActionClick,
+      });
+    }
+
     this.isOpen = true;
     this.message = message;
     this.severity = severity;
@@ -23,11 +34,17 @@ class SnackbarStore implements SnackbarStoreType {
   }
 
   close() {
-    this.isOpen = false;
+    if (this.queue.length > 0) {
+      this.isOpen = false;
+      const nextSnackbar = this.queue.shift();
 
-    setTimeout(() => {
+      if (nextSnackbar) {
+        this.show(nextSnackbar);
+      }
+    } else {
       this.reset();
-    }, 500);
+      this.isOpen = false;
+    }
   }
 
   reset() {
@@ -35,6 +52,10 @@ class SnackbarStore implements SnackbarStoreType {
     this.actionLabel = '';
     this.severity = undefined;
     this.onActionClick = undefined;
+  }
+
+  enqueueSnackbar(options: SnackbarOptions) {
+    this.queue.push(options);
   }
 }
 

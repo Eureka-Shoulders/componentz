@@ -1,0 +1,27 @@
+name: Chromatic
+on:
+  push:
+    branches:
+      - develop
+  release:
+    types: [created]
+jobs:
+  chromatic:
+    name: Publish Storybook on chromatic
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Install dependencies
+        run: yarn && yarn add @mui/material @emotion/react @emotion/styled inversify inversify-react mobx mobx-react-lite
+
+      - name: Lint
+        run: yarn lint
+
+      - name: Publish to Chromatic
+        uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}

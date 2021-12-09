@@ -17,6 +17,7 @@ export interface SnackbarStoreType {
   show(options: SnackbarOptions): void;
   close(): void;
   reset(): void;
+  enqueueSnackbar(options: SnackbarOptions): void;
 }
 
 export interface DialogStoreType {
