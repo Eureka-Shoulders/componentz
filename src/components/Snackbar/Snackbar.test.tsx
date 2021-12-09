@@ -1,15 +1,16 @@
 import 'reflect-metadata';
-import React from 'react';
+
 import {
+  getByTestId,
   render,
   RenderResult,
   screen,
-  getByTestId,
   waitFor,
 } from '@testing-library/react';
 import { globalContainer, Snackbar } from 'index';
-import { Provider } from 'inversify-react';
 import { Container } from 'inversify';
+import { Provider } from 'inversify-react';
+import React from 'react';
 import TYPES from '../../containers/global.types';
 import { UIStoreType } from '../../stores/types';
 
@@ -21,9 +22,9 @@ describe('Snackbar', () => {
   let unitContainer: Container;
 
   beforeEach(() => {
+    onActionSpy = jest.fn();
     unitContainer = globalContainer();
 
-    onActionSpy = jest.fn();
     mockedSnackbar = render(
       <Provider container={unitContainer}>
         <button data-testid="outButton">outButton</button>

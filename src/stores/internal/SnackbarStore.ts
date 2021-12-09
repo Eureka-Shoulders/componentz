@@ -35,7 +35,6 @@ class SnackbarStore implements SnackbarStoreType {
 
   close() {
     if (this.queue.length > 0) {
-      this.isOpen = false;
       const nextSnackbar = this.queue.shift();
 
       if (nextSnackbar) {

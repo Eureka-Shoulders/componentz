@@ -23,7 +23,12 @@ function Dialog({
       open={uiStore.dialog.isOpen}
       onClick={uiStore.dialog.close}
     >
-      <MuiDialog {...rest} open={uiStore.dialog.isOpen} keepMounted>
+      <MuiDialog
+        {...rest}
+        open={uiStore.dialog.isOpen}
+        keepMounted
+        data-testid="dialog"
+      >
         {uiStore.dialog.title ? (
           <DialogTitle>{uiStore.dialog.title}</DialogTitle>
         ) : null}
