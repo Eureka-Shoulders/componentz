@@ -69,6 +69,7 @@
     "inversify": "^6.0.1",
     "inversify-react": "^1.0.0",
     "jest": "^27.3.1",
+    "jest-dom": "^4.0.0",
     "mobx": "^6.3.7",
     "mobx-react-lite": "^3.2.2",
     "postcss": "^8.4.0",

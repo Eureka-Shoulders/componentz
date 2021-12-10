@@ -59,6 +59,7 @@ function Snackbar({ ...rest }: SnackbarProps) {
       {...rest}
       open={uiStore.snackbar.isOpen}
       onClose={uiStore.snackbar.close}
+      data-testid="snackbar"
       action={
         uiStore.snackbar.actionLabel && (
           <Action

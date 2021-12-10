@@ -17,14 +17,18 @@ function handleClickLink(
   };
 }
 
+/**
+ * @returns A component that displays Breadcrumbs and should be controlled by the UIStore
+ */
+
 function Breadcrumbs(props: BreadcrumbsProps) {
   const uiStore = useUIStore();
 
   return (
-    <MuiBreadcrumbs {...props}>
+    <MuiBreadcrumbs {...props} data-testid="breadcrumbs">
       {uiStore.breadcrumb.linkedPaths.map((path) => (
         <Link
-          key={path.link}
+          key={path.label}
           underline="hover"
           color="inherit"
           href={path.link}
