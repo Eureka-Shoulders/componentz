@@ -10,6 +10,10 @@ import React from 'react';
 import useUIStore from '../../hooks/useUIStore';
 import { DialogProps } from './types';
 
+/**
+ * @returns A component that displays a Dialog and should be controlled by the UIStore
+ */
+
 function Dialog({
   confirmLabel = 'Confirm',
   cancelLabel = 'Cancel',

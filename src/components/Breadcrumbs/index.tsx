@@ -17,6 +17,10 @@ function handleClickLink(
   };
 }
 
+/**
+ * @returns A component that displays Breadcrumbs and should be controlled by the UIStore
+ */
+
 function Breadcrumbs(props: BreadcrumbsProps) {
   const uiStore = useUIStore();
 
