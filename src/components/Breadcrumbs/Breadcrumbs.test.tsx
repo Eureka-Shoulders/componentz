@@ -1,39 +1,56 @@
 import 'reflect-metadata';
 
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { globalContainer } from 'index';
+import TYPES from '../../containers/global.types';
+import { UIStoreType } from '@stores/types';
+import {
+  getByTestId,
+  render,
+  RenderResult,
+  screen,
+} from '@testing-library/react';
+import { Breadcrumb, globalContainer } from 'index';
+import { Container } from 'inversify';
 import { Provider } from 'inversify-react';
-import { BreadcrumbsContainer } from '../../tests/fixtures/BreadcrumbFixtures';
+import React from 'react';
 
 describe('Breadcrumbs', () => {
   let onClickSpy: jest.Mock;
+  let mockedBreadcrumb: RenderResult;
+  let unitContainer: Container;
 
   beforeEach(() => {
     onClickSpy = jest.fn();
+
+    unitContainer = globalContainer();
+
+    mockedBreadcrumb = render(
+      <Provider container={unitContainer}>
+        <Breadcrumb />
+      </Provider>
+    );
   });
 
   it('should renders correctly', async () => {
-    const paths = [
+    const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
+
+    uiStore.breadcrumb.setPaths([
       {
         label: 'Home',
       },
       {
         label: 'About',
       },
-    ];
+    ]);
 
-    render(
-      <Provider container={globalContainer}>
-        <BreadcrumbsContainer newPaths={paths} />
-      </Provider>
-    );
-
-    expect(await screen.findByText(/Home/i)).not.toBeNull();
+    expect(
+      getByTestId(mockedBreadcrumb.container, 'breadcrumbs')
+    ).not.toBeNull();
   });
 
   it('should call onClick function when the user clicks', async () => {
-    const paths = [
+    const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
+
+    uiStore.breadcrumb.setPaths([
       {
         label: 'Home',
         onClick: onClickSpy,
@@ -41,19 +58,16 @@ describe('Breadcrumbs', () => {
       {
         label: 'About',
       },
-    ];
+    ]);
 
-    render(
-      <Provider container={globalContainer}>
-        <BreadcrumbsContainer newPaths={paths} />
-      </Provider>
-    );
     (await screen.findByText(/Home/i)).click();
     expect(onClickSpy).toHaveBeenCalled();
   });
 
   it('should disable last path', async () => {
-    const paths = [
+    const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
+
+    uiStore.breadcrumb.setPaths([
       {
         label: 'Home',
       },
@@ -61,13 +75,7 @@ describe('Breadcrumbs', () => {
         label: 'About',
         onClick: onClickSpy,
       },
-    ];
-
-    render(
-      <Provider container={globalContainer}>
-        <BreadcrumbsContainer newPaths={paths} />
-      </Provider>
-    );
+    ]);
 
     (await screen.findByText(/About/i)).click();
     expect(onClickSpy).not.toHaveBeenCalled();

@@ -8,5 +8,5 @@ module.exports = {
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest', // That one tells Jest to use ts-jest when dealing with TypeScript files
   },
-  collectCoverageFrom: ['src/**/*.{ts,tsx}'],
+  collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/**/*.stories.{ts,tsx}'],
 };

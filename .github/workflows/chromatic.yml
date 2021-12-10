@@ -16,7 +16,7 @@ jobs:
           fetch-depth: 0
 
       - name: Install dependencies
-        run: yarn && yarn add @mui/material @emotion/react @emotion/styled inversify inversify-react mobx mobx-react-lite
+        run: yarn && yarn add @mui/material @emotion/react @emotion/styled inversify inversify-react mobx mobx-react-lite reflect-metadata
 
       - name: Lint
         run: yarn lint

@@ -25,7 +25,7 @@ function Breadcrumbs(props: BreadcrumbsProps) {
   const uiStore = useUIStore();
 
   return (
-    <MuiBreadcrumbs {...props}>
+    <MuiBreadcrumbs {...props} data-testid="breadcrumbs">
       {uiStore.breadcrumb.linkedPaths.map((path) => (
         <Link
           key={path.label}
