@@ -1,4 +1,3 @@
-import useUIStore from '../../hooks/useUIStore';
 import {
   Alert,
   Button,
@@ -8,6 +7,7 @@ import {
 } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
+import useUIStore from '../../hooks/useUIStore';
 
 interface ButtonProps extends MuiButtonProps {
   label: string;
@@ -21,7 +21,11 @@ function Action({ label, ...rest }: ButtonProps) {
   );
 }
 
-function Snackbar({ autoHideDuration, ...rest }: SnackbarProps) {
+/**
+ * @returns A component that displays a Snackbar and should be controlled by the UIStore
+ */
+
+function Snackbar({ ...rest }: SnackbarProps) {
   const uiStore = useUIStore();
 
   if (uiStore.snackbar.severity) {
@@ -29,10 +33,10 @@ function Snackbar({ autoHideDuration, ...rest }: SnackbarProps) {
       <MuiSnackbar
         {...rest}
         open={uiStore.snackbar.isOpen}
-        autoHideDuration={autoHideDuration}
         onClose={uiStore.snackbar.close}
       >
         <Alert
+          data-testid="snackbar"
           variant="filled"
           severity={uiStore.snackbar.severity}
           onClose={uiStore.snackbar.close}
@@ -49,25 +53,24 @@ function Snackbar({ autoHideDuration, ...rest }: SnackbarProps) {
         </Alert>
       </MuiSnackbar>
     );
-  } else {
-    return (
-      <MuiSnackbar
-        {...rest}
-        open={uiStore.snackbar.isOpen}
-        autoHideDuration={autoHideDuration}
-        onClose={uiStore.snackbar.close}
-        action={
-          uiStore.snackbar.actionLabel && (
-            <Action
-              label={uiStore.snackbar.actionLabel}
-              onClick={uiStore.snackbar.onActionClick}
-            />
-          )
-        }
-        message={uiStore.snackbar.message}
-      />
-    );
   }
+  return (
+    <MuiSnackbar
+      {...rest}
+      open={uiStore.snackbar.isOpen}
+      onClose={uiStore.snackbar.close}
+      data-testid="snackbar"
+      action={
+        uiStore.snackbar.actionLabel && (
+          <Action
+            label={uiStore.snackbar.actionLabel}
+            onClick={uiStore.snackbar.onActionClick}
+          />
+        )
+      }
+      message={uiStore.snackbar.message}
+    />
+  );
 }
 
 export default observer(Snackbar);

@@ -1,4 +1,5 @@
-import { BreadcrumbPaths } from '../components/Breadcrumb/types';
+import { BreadcrumbPath } from '../components/Breadcrumbs/types';
+import { ReactNode } from 'react';
 
 export interface UIStoreType {
   snackbar: SnackbarStoreType;
@@ -16,6 +17,7 @@ export interface SnackbarStoreType {
   show(options: SnackbarOptions): void;
   close(): void;
   reset(): void;
+  enqueueSnackbar(options: SnackbarOptions): void;
 }
 
 export interface DialogStoreType {
@@ -23,7 +25,7 @@ export interface DialogStoreType {
   onReject?: () => void;
   onAccept?: () => void;
   title?: string;
-  content?: import('react').ReactNode;
+  content?: ReactNode;
 
   set(options: DialogOptions): void;
   open(): void;
@@ -31,10 +33,11 @@ export interface DialogStoreType {
 }
 
 export interface BreadcrumbStoreType {
-  paths: BreadcrumbPaths[];
+  paths: BreadcrumbPath[];
+  linkedPaths: BreadcrumbPath[];
   finalPath: string | undefined;
 
-  setPaths(paths: BreadcrumbPaths[]): void;
+  setPaths(paths: BreadcrumbPath[]): void;
 }
 
 // Store Options
@@ -42,7 +45,7 @@ export interface DialogOptions {
   title?: string;
   onReject?: () => void;
   onAccept?: () => void;
-  content?: import('react').ReactNode;
+  content?: ReactNode;
 }
 
 export interface SnackbarOptions {

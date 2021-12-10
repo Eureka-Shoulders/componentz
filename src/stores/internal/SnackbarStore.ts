@@ -1,12 +1,14 @@
 import { AlertColor } from '@mui/material';
-import { SnackbarOptions, SnackbarStoreType } from '../types';
 import { makeAutoObservable } from 'mobx';
+import { SnackbarOptions, SnackbarStoreType } from '../types';
 
 // TODO: Make unit tests of this store
 class SnackbarStore implements SnackbarStoreType {
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
   }
+
+  queue: SnackbarOptions[] = [];
 
   isOpen = false;
   message = '';
@@ -15,6 +17,15 @@ class SnackbarStore implements SnackbarStoreType {
   onActionClick?: () => void = undefined;
 
   show({ message, severity, actionLabel, onActionClick }: SnackbarOptions) {
+    if (this.isOpen) {
+      return this.enqueueSnackbar({
+        message,
+        severity,
+        actionLabel,
+        onActionClick,
+      });
+    }
+
     this.isOpen = true;
     this.message = message;
     this.severity = severity;
@@ -23,11 +34,16 @@ class SnackbarStore implements SnackbarStoreType {
   }
 
   close() {
-    this.isOpen = false;
+    if (this.queue.length > 0) {
+      const nextSnackbar = this.queue.shift();
 
-    setTimeout(() => {
+      if (nextSnackbar) {
+        this.show(nextSnackbar);
+      }
+    } else {
       this.reset();
-    }, 500);
+      this.isOpen = false;
+    }
   }
 
   reset() {
@@ -35,6 +51,10 @@ class SnackbarStore implements SnackbarStoreType {
     this.actionLabel = '';
     this.severity = undefined;
     this.onActionClick = undefined;
+  }
+
+  enqueueSnackbar(options: SnackbarOptions) {
+    this.queue.push(options);
   }
 }
 
