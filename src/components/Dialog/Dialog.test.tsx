@@ -1,17 +1,12 @@
 import 'reflect-metadata';
 
-import TYPES from '../../containers/global.types';
 import { UIStoreType } from '@stores/types';
-import {
-  getByTestId,
-  render,
-  RenderResult,
-  screen,
-} from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { Dialog, globalContainer } from 'index';
 import { Container } from 'inversify';
 import { Provider } from 'inversify-react';
 import React from 'react';
+import TYPES from '../../containers/global.types';
 
 describe('Dialog', () => {
   let onRejectSpy: jest.Mock;
