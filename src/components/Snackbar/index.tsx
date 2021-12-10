@@ -21,6 +21,10 @@ function Action({ label, ...rest }: ButtonProps) {
   );
 }
 
+/**
+ * @returns A component that displays a Snackbar and should be controlled by the UIStore
+ */
+
 function Snackbar({ ...rest }: SnackbarProps) {
   const uiStore = useUIStore();
 
@@ -32,6 +36,7 @@ function Snackbar({ ...rest }: SnackbarProps) {
         onClose={uiStore.snackbar.close}
       >
         <Alert
+          data-testid="snackbar"
           variant="filled"
           severity={uiStore.snackbar.severity}
           onClose={uiStore.snackbar.close}

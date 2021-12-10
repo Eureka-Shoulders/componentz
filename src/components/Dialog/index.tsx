@@ -10,6 +10,10 @@ import React from 'react';
 import useUIStore from '../../hooks/useUIStore';
 import { DialogProps } from './types';
 
+/**
+ * @returns A component that displays a Dialog and should be controlled by the UIStore
+ */
+
 function Dialog({
   confirmLabel = 'Confirm',
   cancelLabel = 'Cancel',
@@ -23,7 +27,12 @@ function Dialog({
       open={uiStore.dialog.isOpen}
       onClick={uiStore.dialog.close}
     >
-      <MuiDialog {...rest} open={uiStore.dialog.isOpen} keepMounted>
+      <MuiDialog
+        {...rest}
+        open={uiStore.dialog.isOpen}
+        keepMounted
+        data-testid="dialog"
+      >
         {uiStore.dialog.title ? (
           <DialogTitle>{uiStore.dialog.title}</DialogTitle>
         ) : null}
