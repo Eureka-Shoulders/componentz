@@ -2,7 +2,7 @@ import MuiBreadcrumbs, { BreadcrumbsProps } from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { observer } from 'mobx-react-lite';
-import React, { MouseEventHandler } from 'react';
+import { MouseEventHandler } from 'react';
 import useUIStore from '../../hooks/useUIStore';
 import { BreadcrumbPath } from './types';
 

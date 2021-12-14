@@ -15,7 +15,6 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
-    "noEmit": true,
     "types": ["jest"],
     "baseUrl": "src",
     "paths": {
@@ -24,7 +23,11 @@
       "@components/*": ["./components/*"],
       "@stores/*": ["./stores/*"],
       "@hooks/*": ["./hooks/*"]
-    }
+    },
+
+    // Build Options
+    "declaration": true,
+    "declarationDir": "./lib/types"
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules", "dist"]
