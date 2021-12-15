@@ -100,5 +100,7 @@
     "react-dom": ">=17",
     "reflect-metadata": ">=0.1.13"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@mui/icons-material": "^5.2.4"
+  }
 }

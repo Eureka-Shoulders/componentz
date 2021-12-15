@@ -1,11 +1,15 @@
 import { BreadcrumbPath } from '../components/Breadcrumbs/types';
 import { ReactNode } from 'react';
+import { Page } from '@components/AppBar/types';
 
 export interface UIStoreType {
   snackbar: SnackbarStoreType;
   dialog: DialogStoreType;
   breadcrumb: BreadcrumbStoreType;
+  appBar: AppBarStoreType;
 }
+
+// ------------------------- UI Store Types -------------------------
 
 export interface SnackbarStoreType {
   isOpen: boolean;
@@ -40,7 +44,21 @@ export interface BreadcrumbStoreType {
   setPaths(paths: BreadcrumbPath[]): void;
 }
 
-// Store Options
+export interface AppBarStoreType {
+  pages: Page[];
+  isDrawerOpen: boolean;
+  AppBarHeaderContent?: ReactNode;
+  DrawerHeaderContent?: ReactNode;
+  onClickDrawerOption(page: Page): void;
+
+  setPages(pages: Page[]): void;
+  toggleDrawer(): void;
+  setDrawerHeaderContent(content?: ReactNode): void;
+  setAppBarHeaderContent(content?: ReactNode): void;
+  setOnClickDrawerOption(newAction: (page: Page) => void): void;
+}
+
+// ------------------------- UI Store Options -------------------------
 export interface DialogOptions {
   title?: string;
   onReject?: () => void;

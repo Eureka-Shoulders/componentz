@@ -17,5 +17,7 @@
     "sourceType": "module"
   },
   "plugins": ["react", "@typescript-eslint"],
-  "rules": {}
+  "rules": {
+    "no-extra-boolean-cast": 0
+  }
 }
