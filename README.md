@@ -24,10 +24,10 @@ Our dependencies:
 
 ```bash
 # Using npm:
-npm install @mui/material @emotion/react @emotion/styled inversify inversify-react mobx mobx-react-lite
+npm install @mui/material @mui/icons-material @emotion/react @emotion/styled inversify inversify-react mobx mobx-react-lite
 
 # Using yarn:
-yarn add @mui/material @emotion/react @emotion/styled inversify inversify-react mobx mobx-react-lite
+yarn add @mui/material @mui/icons-material @emotion/react @emotion/styled inversify inversify-react mobx mobx-react-lite
 ```
 
 Installing Componentz 🤩
