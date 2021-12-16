@@ -5,7 +5,7 @@ import MuiDialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { useUIStore } from 'index';
+import { useUIStore } from '../../index';
 import { observer } from 'mobx-react-lite';
 import { DialogProps } from './types';
 

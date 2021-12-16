@@ -8,6 +8,6 @@ type MuiIcon = OverridableComponent<
 export interface Page {
   label: string;
   link: string;
-  Icon: MuiIcon;
+  Icon: MuiIcon | (() => JSX.Element);
   sub?: Omit<Page, 'sub'>[];
 }

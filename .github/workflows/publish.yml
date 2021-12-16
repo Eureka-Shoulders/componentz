@@ -17,7 +17,7 @@ jobs:
           scope: '@euk-labs'
 
       - name: Install dependencies
-        run: yarn install && yarn add reflect-metadata
+        run: yarn install
 
       - name: Lint
         run: yarn lint

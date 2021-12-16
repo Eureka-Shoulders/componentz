@@ -1,14 +1,15 @@
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
-import { useUIStore } from 'index';
-import React, { ReactNode } from 'react';
-import { DrawerItem } from './DrawerItem';
+import { useUIStore } from '../../index';
+import { observer } from 'mobx-react-lite';
+import { ReactNode } from 'react';
+import DrawerItem from './DrawerItem';
 import { StyledAppBar } from './StyledAppBar';
 import { DrawerHeader, StyledDrawer } from './StyledDrawer';
-import { Toolbar } from './Toolbar';
+import Toolbar from './Toolbar';
 
-interface AppBarProps {
+export interface AppBarProps {
   children?: ReactNode;
 }
 
@@ -16,7 +17,7 @@ const AppBar = ({ children }: AppBarProps) => {
   const uiStore = useUIStore();
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box data-testid="appbar" sx={{ display: 'flex' }}>
       <StyledAppBar position="fixed" open={uiStore.appBar.isDrawerOpen}>
         <Toolbar />
       </StyledAppBar>
@@ -37,4 +38,4 @@ const AppBar = ({ children }: AppBarProps) => {
   );
 };
 
-export default AppBar;
+export default observer(AppBar);

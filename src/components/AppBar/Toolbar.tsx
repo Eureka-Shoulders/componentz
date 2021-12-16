@@ -4,10 +4,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import IconButton from '@mui/material/IconButton';
 import { useTheme } from '@mui/material/styles';
 import MuiToolbar from '@mui/material/Toolbar';
-import { useUIStore } from 'index';
-import React from 'react';
+import { observer } from 'mobx-react-lite';
+import { useUIStore } from '../../index';
 
-export function Toolbar() {
+function Toolbar() {
   const theme = useTheme();
   const uiStore = useUIStore();
 
@@ -37,3 +37,5 @@ export function Toolbar() {
     </MuiToolbar>
   );
 }
+
+export default observer(Toolbar);

@@ -10,7 +10,6 @@ import {
 import { globalContainer, Snackbar } from 'index';
 import { Container } from 'inversify';
 import { Provider } from 'inversify-react';
-import React from 'react';
 import TYPES from '../../containers/global.types';
 import { UIStoreType } from '../../stores/types';
 

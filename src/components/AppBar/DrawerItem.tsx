@@ -4,15 +4,16 @@ import Collapse from '@mui/material/Collapse';
 import List from '@mui/material/List';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { useUIStore } from 'index';
-import React, { Fragment, useState } from 'react';
+import { useUIStore } from '../../index';
+import { Fragment, useState } from 'react';
 import { Page } from './types';
+import { observer } from 'mobx-react-lite';
 
 interface DrawerItemProps {
   page: Page;
 }
 
-export const DrawerItem = ({ page }: DrawerItemProps) => {
+const DrawerItem = ({ page }: DrawerItemProps) => {
   const [expanded, setExpanded] = useState(false);
   const uiStore = useUIStore();
 
@@ -30,7 +31,7 @@ export const DrawerItem = ({ page }: DrawerItemProps) => {
     <Fragment key={page.link}>
       <ListItemButton
         key={page.link}
-        sx={{ minHeight: 48 }}
+        sx={{ minHeight: 48, pl: 2.5 }}
         onClick={handleClick(page)}
       >
         <ListItemIcon
@@ -74,3 +75,5 @@ export const DrawerItem = ({ page }: DrawerItemProps) => {
     </Fragment>
   );
 };
+
+export default observer(DrawerItem);
