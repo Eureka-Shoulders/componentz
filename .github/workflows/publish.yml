@@ -17,16 +17,16 @@ jobs:
           scope: '@euk-labs'
 
       - name: Install dependencies
-        run: npm install
+        run: yarn install && yarn add reflect-metadata
 
       - name: Lint
-        run: npm run lint
+        run: yarn lint
 
       - name: Test
         run: yarn test --ci --coverage --maxWorkers=2
 
       - name: Generate build
-        run: npm run build
+        run: yarn build
 
       - name: Publish lib to NPM
         run: npm publish --access public
