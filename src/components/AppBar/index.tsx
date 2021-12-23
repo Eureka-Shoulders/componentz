@@ -25,9 +25,11 @@ const AppBar = ({ children }: AppBarProps) => {
         <DrawerHeader>{uiStore.appBar.DrawerHeaderContent}</DrawerHeader>
         <Divider />
         <List>
-          {uiStore.appBar.pages.map((page) => (
-            <DrawerItem key={page.link} page={page} />
-          ))}
+          {uiStore.appBar.pages
+            .filter((page) => page.drawer !== false)
+            .map((page) => (
+              <DrawerItem key={page.link} page={page} />
+            ))}
         </List>
       </StyledDrawer>
       <Box component="main" flexGrow={1}>

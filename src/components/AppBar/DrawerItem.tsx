@@ -17,13 +17,22 @@ const DrawerItem = ({ page }: DrawerItemProps) => {
   const [expanded, setExpanded] = useState(false);
   const uiStore = useUIStore();
 
-  const handleClick = (page: Page) => {
+  const drawerSubPages = page.sub?.filter(
+    (subPage) => subPage.drawer !== false
+  );
+
+  const handleClick = (page: Page, haveSub?: boolean) => {
     return () => {
-      if (!!page.sub) {
-        setExpanded(!expanded);
-        return;
+      if (haveSub) {
+        if (uiStore.appBar.isDrawerOpen) {
+          uiStore.appBar.onClickDrawerOption(page);
+          setExpanded(false);
+          return;
+        }
+
+        uiStore.appBar.onClickDrawerOption(page);
+        return setExpanded(!expanded);
       }
-      uiStore.appBar.onClickDrawerOption(page);
     };
   };
 
@@ -32,7 +41,7 @@ const DrawerItem = ({ page }: DrawerItemProps) => {
       <ListItemButton
         key={page.link}
         sx={{ minHeight: 48, pl: 2.5 }}
-        onClick={handleClick(page)}
+        onClick={handleClick(page, !!drawerSubPages?.length)}
       >
         <ListItemIcon
           sx={{
@@ -45,7 +54,7 @@ const DrawerItem = ({ page }: DrawerItemProps) => {
           hidden={!uiStore.appBar.isDrawerOpen}
           primary={page.label}
         />
-        {!!page.sub && uiStore.appBar.isDrawerOpen ? (
+        {!!drawerSubPages?.length && uiStore.appBar.isDrawerOpen ? (
           expanded ? (
             <ExpandLess />
           ) : (

@@ -10,4 +10,5 @@ export interface Page {
   link: string;
   Icon: MuiIcon | (() => JSX.Element);
   sub?: Omit<Page, 'sub'>[];
+  drawer?: boolean;
 }
