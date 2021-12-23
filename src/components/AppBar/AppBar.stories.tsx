@@ -13,8 +13,6 @@ import { useEffect } from 'react';
 import AppBar from '.';
 import useUIStore from '../../hooks/useUIStore';
 
-const onClickAction = action('onClickAction');
-
 export default {
   title: 'AppBar',
   component: AppBar,

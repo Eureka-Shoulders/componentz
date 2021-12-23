@@ -14,13 +14,10 @@ import { Provider } from 'inversify-react';
 import { Dashboard } from '@mui/icons-material';
 
 describe('AppBar', () => {
-  let onClickSpy: jest.Mock;
   let mockedAppBar: RenderResult;
   let unitContainer: Container;
 
   beforeEach(() => {
-    onClickSpy = jest.fn();
-
     unitContainer = globalContainer();
 
     mockedAppBar = render(

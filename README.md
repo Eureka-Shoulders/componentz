@@ -22,13 +22,13 @@ The goal is not to replace the MUI, but to be an extension
 
 Our dependencies:
 
-````bash
+```bash
 # Using npm:
 npm install @mui/material @mui/icons-material @mui/lab @emotion/react @emotion/styled mobx mobx-react-lite
 
 # Using yarn:
 yarn add @mui/material @mui/icons-material @mui/lab @emotion/react @emotion/styled mobx mobx-react-lite
-
+```
 
 Installing Componentz 🤩
 
@@ -38,7 +38,7 @@ npm i @euk-labs/componentz
 
 # Using yarn:
 yarn add @euk-labs/componentz
-````
+```
 
 ## Usage
 
