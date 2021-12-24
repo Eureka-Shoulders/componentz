@@ -2,7 +2,7 @@
 import { AlertColor } from '@mui/material';
 import { action } from '@storybook/addon-actions';
 import { ComponentMeta } from '@storybook/react';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import Snackbar from '.';
 import useUIStore from '../../hooks/useUIStore';
 
