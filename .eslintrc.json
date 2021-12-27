@@ -17,5 +17,8 @@
     "sourceType": "module"
   },
   "plugins": ["react", "@typescript-eslint"],
-  "rules": {}
+  "rules": {
+    "no-extra-boolean-cast": 0,
+    "react/react-in-jsx-scope": "off"
+  }
 }

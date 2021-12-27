@@ -1,9 +1,9 @@
 import MuiBreadcrumbs, { BreadcrumbsProps } from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
+import { useUIStore } from '../../index';
 import { observer } from 'mobx-react-lite';
-import React, { MouseEventHandler } from 'react';
-import useUIStore from '../../hooks/useUIStore';
+import { MouseEventHandler } from 'react';
 import { BreadcrumbPath } from './types';
 
 function handleClickLink(

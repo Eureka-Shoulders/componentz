@@ -5,9 +5,8 @@ import {
   Snackbar as MuiSnackbar,
   SnackbarProps,
 } from '@mui/material';
+import { useUIStore } from '../../index';
 import { observer } from 'mobx-react-lite';
-import React from 'react';
-import useUIStore from '../../hooks/useUIStore';
 
 interface ButtonProps extends MuiButtonProps {
   label: string;

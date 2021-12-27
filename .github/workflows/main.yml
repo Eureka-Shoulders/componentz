@@ -15,7 +15,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node: ['12.x', '14.x', '16.x']
+        node: ['14.x', '16.x']
         os: [ubuntu-latest]
 
     steps:
@@ -28,7 +28,7 @@ jobs:
           node-version: ${{ matrix.node }}
 
       - name: Install
-        run: yarn install && yarn add reflect-metadata
+        run: yarn install && yarn add @mui/material @mui/icons-material @mui/lab @emotion/react @emotion/styled mobx mobx-react-lite
 
       - name: Lint
         run: yarn lint

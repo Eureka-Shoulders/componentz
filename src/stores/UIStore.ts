@@ -1,5 +1,6 @@
 import { injectable } from 'inversify';
 import { makeAutoObservable } from 'mobx';
+import AppBarStore from './internal/AppBarStore';
 import BreadcrumbStore from './internal/BreadcrumbStore';
 import DialogStore from './internal/DialogStore';
 import SnackbarStore from './internal/SnackbarStore';
@@ -14,6 +15,7 @@ class UIStore implements UIStoreType {
   snackbar = new SnackbarStore();
   dialog = new DialogStore();
   breadcrumb = new BreadcrumbStore();
+  appBar = new AppBarStore();
 }
 
 export default UIStore;

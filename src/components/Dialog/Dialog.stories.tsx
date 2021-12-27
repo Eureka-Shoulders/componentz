@@ -2,7 +2,7 @@
 import { Typography } from '@mui/material';
 import { action } from '@storybook/addon-actions';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import Dialog from '.';
 import useUIStore from '../../hooks/useUIStore';
 

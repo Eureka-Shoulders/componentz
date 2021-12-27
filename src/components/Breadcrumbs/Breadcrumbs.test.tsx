@@ -11,7 +11,6 @@ import {
 import { Breadcrumb, globalContainer } from 'index';
 import { Container } from 'inversify';
 import { Provider } from 'inversify-react';
-import React from 'react';
 
 describe('Breadcrumbs', () => {
   let onClickSpy: jest.Mock;
