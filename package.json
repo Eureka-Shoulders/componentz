@@ -1,9 +1,9 @@
 {
   "name": "@euk-labs/componentz",
   "version": "0.1.1",
-  "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
-  "types": "lib/types/index.d.ts",
+  "main": "./index.js",
+  "module": "./esm/index.js",
+  "types": "./index.d.ts",
   "files": [
     "lib"
   ],
@@ -65,8 +65,6 @@
     "eslint": "^8.5.0",
     "eslint-plugin-react": "^7.28.0",
     "husky": "^7.0.4",
-    "inversify": "^6.0.1",
-    "inversify-react": "^1.0.1",
     "jest": "^27.4.5",
     "mobx": "^6.3.10",
     "mobx-react-lite": "^3.2.2",

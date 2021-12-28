@@ -8,7 +8,8 @@ import {
   RenderResult,
   screen,
 } from '@testing-library/react';
-import { AppBar, globalContainer } from '../../index';
+import AppBar from './index';
+import globalContainer from '../../containers/global.inversify';
 import { Container } from 'inversify';
 import { Provider } from 'inversify-react';
 import { Dashboard } from '@mui/icons-material';

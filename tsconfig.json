@@ -27,7 +27,7 @@
 
     // Build Options
     "declaration": true,
-    "declarationDir": "./lib/types"
+    "declarationDir": "./lib"
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules", "dist"]
