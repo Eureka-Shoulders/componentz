@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import * as R from 'ramda';
+import { last } from 'ramda';
 import { BreadcrumbPath } from '../../components/Breadcrumbs/types';
 import { BreadcrumbStoreType } from '../types';
 
@@ -16,7 +16,7 @@ class BreadcrumbStore implements BreadcrumbStoreType {
   }
 
   get finalPath() {
-    return R.last(this.paths)?.label ?? '';
+    return last(this.paths)?.label ?? '';
   }
 
   get linkedPaths() {

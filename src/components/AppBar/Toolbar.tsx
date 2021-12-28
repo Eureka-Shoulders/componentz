@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import { useTheme } from '@mui/material/styles';
 import MuiToolbar from '@mui/material/Toolbar';
 import { observer } from 'mobx-react-lite';
-import { useUIStore } from '../../index';
+import useUIStore from '../../hooks/useUIStore';
 
 function Toolbar() {
   const theme = useTheme();
