@@ -55,7 +55,7 @@ rimraf(distFolder, (err) => {
     entryPoints: [...inputs],
     format: 'cjs',
     outbase: sourceFolder,
-    outdir: distFolder + '/cjs',
+    outdir: distFolder,
     jsx: 'transform',
     jsxFactory: 'React.createElement',
     jsxFragment: 'React.Fragment',
