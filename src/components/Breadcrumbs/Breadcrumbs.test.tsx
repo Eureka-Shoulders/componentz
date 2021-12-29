@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 
-import TYPES from '../../containers/global.types';
+import Bindings from '../../containers/global.bindings';
 import { UIStoreType } from '@stores/types';
 import {
   getByTestId,
@@ -30,7 +30,7 @@ describe('Breadcrumbs', () => {
   });
 
   it('should renders correctly', async () => {
-    const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
+    const uiStore = unitContainer.get<UIStoreType>(Bindings.UIStore);
 
     uiStore.breadcrumb.setPaths([
       {
@@ -47,7 +47,7 @@ describe('Breadcrumbs', () => {
   });
 
   it('should call onClick function when the user clicks', async () => {
-    const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
+    const uiStore = unitContainer.get<UIStoreType>(Bindings.UIStore);
 
     uiStore.breadcrumb.setPaths([
       {
@@ -64,7 +64,7 @@ describe('Breadcrumbs', () => {
   });
 
   it('should disable last path', async () => {
-    const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
+    const uiStore = unitContainer.get<UIStoreType>(Bindings.UIStore);
 
     uiStore.breadcrumb.setPaths([
       {

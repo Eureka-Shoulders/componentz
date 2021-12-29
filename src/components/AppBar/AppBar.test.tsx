@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 
-import TYPES from '../../containers/global.types';
+import Bindings from '../../containers/global.bindings';
 import { UIStoreType } from '@stores/types';
 import {
   getByTestId,
@@ -8,7 +8,8 @@ import {
   RenderResult,
   screen,
 } from '@testing-library/react';
-import { AppBar, globalContainer } from '../../index';
+import AppBar from './index';
+import globalContainer from '../../containers/global.inversify';
 import { Container } from 'inversify';
 import { Provider } from 'inversify-react';
 import { Dashboard } from '@mui/icons-material';
@@ -36,7 +37,7 @@ describe('AppBar', () => {
   });
 
   it('should open drawer and render option labels', async () => {
-    const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
+    const uiStore = unitContainer.get<UIStoreType>(Bindings.UIStore);
 
     uiStore.appBar.setPages([
       {
@@ -54,7 +55,7 @@ describe('AppBar', () => {
   });
 
   it('should render AppBar header', async () => {
-    const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
+    const uiStore = unitContainer.get<UIStoreType>(Bindings.UIStore);
 
     uiStore.appBar.setAppBarHeaderContent('AppHeader Header');
 
@@ -62,7 +63,7 @@ describe('AppBar', () => {
   });
 
   it('should render drawer header', async () => {
-    const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
+    const uiStore = unitContainer.get<UIStoreType>(Bindings.UIStore);
 
     uiStore.appBar.setDrawerHeaderContent('Drawer Header');
 

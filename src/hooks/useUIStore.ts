@@ -1,5 +1,5 @@
 import { useInjection } from 'inversify-react';
-import TYPES from '../containers/global.types';
+import Bindings from '../containers/global.bindings';
 import { UIStoreType } from '../stores/types';
 
 /**
@@ -7,5 +7,5 @@ import { UIStoreType } from '../stores/types';
  */
 
 export default function useUIStore(): UIStoreType {
-  return useInjection<UIStoreType>(TYPES.UIStore);
+  return useInjection<UIStoreType>(Bindings.UIStore);
 }

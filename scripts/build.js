@@ -35,7 +35,7 @@ rimraf(distFolder, (err) => {
     entryPoints: [...inputs],
     format: 'esm',
     outbase: sourceFolder,
-    outdir: distFolder + '/esm',
+    outdir: distFolder,
     jsx: 'transform',
     jsxFactory: 'React.createElement',
     jsxFragment: 'React.Fragment',
@@ -46,6 +46,7 @@ rimraf(distFolder, (err) => {
     tsconfig: 'tsconfig.json',
     minify: true,
     inject: ['./scripts/react-shim.js'],
+    splitting: true,
   });
   console.timeEnd('Generating ESM output...');
 
@@ -67,4 +68,9 @@ rimraf(distFolder, (err) => {
     inject: ['./scripts/react-shim.js'],
   });
   console.timeEnd('Generating CJS output...');
+
+  fs.copyFileSync(
+    path.join('./package.json'),
+    path.join(distFolder, 'package.json')
+  );
 });
