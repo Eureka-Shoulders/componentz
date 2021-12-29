@@ -10,7 +10,7 @@ import {
 import { globalContainer, Snackbar } from 'index';
 import { Container } from 'inversify';
 import { Provider } from 'inversify-react';
-import TYPES from '../../containers/global.types';
+import Bindings from '../../containers/global.bindings';
 import { UIStoreType } from '../../stores/types';
 
 jest.setTimeout(30000);
@@ -33,7 +33,7 @@ describe('Snackbar', () => {
   });
 
   it('should renders correctly', async () => {
-    const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
+    const uiStore = unitContainer.get<UIStoreType>(Bindings.UIStore);
     uiStore.snackbar.show({
       message: 'message',
       severity: 'error',
@@ -48,7 +48,7 @@ describe('Snackbar', () => {
   });
 
   it('should call onAction function when the user clicks', async () => {
-    const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
+    const uiStore = unitContainer.get<UIStoreType>(Bindings.UIStore);
     uiStore.snackbar.show({
       message: 'message',
       severity: 'error',
@@ -61,7 +61,7 @@ describe('Snackbar', () => {
   });
 
   it('should close alert snackbar after 3 seconds', async () => {
-    const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
+    const uiStore = unitContainer.get<UIStoreType>(Bindings.UIStore);
 
     uiStore.snackbar.show({
       message: 'Hello World',
@@ -77,7 +77,7 @@ describe('Snackbar', () => {
   });
 
   it('should close alert snackbar after click away', async () => {
-    const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
+    const uiStore = unitContainer.get<UIStoreType>(Bindings.UIStore);
 
     uiStore.snackbar.show({
       message: 'Hello World',
@@ -94,7 +94,7 @@ describe('Snackbar', () => {
   });
 
   it('should have a test button in alert snackbar', async () => {
-    const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
+    const uiStore = unitContainer.get<UIStoreType>(Bindings.UIStore);
 
     function snackbarAction() {
       uiStore.snackbar.close();
@@ -111,7 +111,7 @@ describe('Snackbar', () => {
   });
 
   it('should close alert snackbar after click on close button', async () => {
-    const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
+    const uiStore = unitContainer.get<UIStoreType>(Bindings.UIStore);
 
     function closeSnackbar() {
       uiStore.snackbar.close();
@@ -134,7 +134,7 @@ describe('Snackbar', () => {
   });
 
   it('should enqueue new snackbar', async () => {
-    const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
+    const uiStore = unitContainer.get<UIStoreType>(Bindings.UIStore);
 
     uiStore.snackbar.show({
       message: 'Hello World',

@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 
-import TYPES from '../../containers/global.types';
+import Bindings from '../../containers/global.bindings';
 import { UIStoreType } from '@stores/types';
 import {
   getByTestId,
@@ -37,7 +37,7 @@ describe('AppBar', () => {
   });
 
   it('should open drawer and render option labels', async () => {
-    const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
+    const uiStore = unitContainer.get<UIStoreType>(Bindings.UIStore);
 
     uiStore.appBar.setPages([
       {
@@ -55,7 +55,7 @@ describe('AppBar', () => {
   });
 
   it('should render AppBar header', async () => {
-    const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
+    const uiStore = unitContainer.get<UIStoreType>(Bindings.UIStore);
 
     uiStore.appBar.setAppBarHeaderContent('AppHeader Header');
 
@@ -63,7 +63,7 @@ describe('AppBar', () => {
   });
 
   it('should render drawer header', async () => {
-    const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
+    const uiStore = unitContainer.get<UIStoreType>(Bindings.UIStore);
 
     uiStore.appBar.setDrawerHeaderContent('Drawer Header');
 

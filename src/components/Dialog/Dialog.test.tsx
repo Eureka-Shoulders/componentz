@@ -5,7 +5,7 @@ import { render, screen } from '@testing-library/react';
 import { Dialog, globalContainer } from 'index';
 import { Container } from 'inversify';
 import { Provider } from 'inversify-react';
-import TYPES from '../../containers/global.types';
+import Bindings from '../../containers/global.bindings';
 
 describe('Dialog', () => {
   let onRejectSpy: jest.Mock;
@@ -25,7 +25,7 @@ describe('Dialog', () => {
   });
 
   it('should renders correctly', async () => {
-    const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
+    const uiStore = unitContainer.get<UIStoreType>(Bindings.UIStore);
 
     uiStore.dialog.set({
       title: 'Test title',
@@ -38,7 +38,7 @@ describe('Dialog', () => {
   });
 
   it('should call onAccept function when the user clicks', async () => {
-    const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
+    const uiStore = unitContainer.get<UIStoreType>(Bindings.UIStore);
 
     uiStore.dialog.set({
       title: 'Test title',
@@ -52,7 +52,7 @@ describe('Dialog', () => {
   });
 
   it('should call onReject function when the user clicks', async () => {
-    const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
+    const uiStore = unitContainer.get<UIStoreType>(Bindings.UIStore);
 
     uiStore.dialog.set({
       title: 'Test title',
@@ -66,7 +66,7 @@ describe('Dialog', () => {
   });
 
   it('should render a JSX as content', () => {
-    const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
+    const uiStore = unitContainer.get<UIStoreType>(Bindings.UIStore);
 
     uiStore.dialog.set({
       title: 'Test title',
@@ -79,7 +79,7 @@ describe('Dialog', () => {
   });
 
   it('should render a new content with dialog open', () => {
-    const uiStore = unitContainer.get<UIStoreType>(TYPES.UIStore);
+    const uiStore = unitContainer.get<UIStoreType>(Bindings.UIStore);
 
     uiStore.dialog.set({
       title: 'Test title',

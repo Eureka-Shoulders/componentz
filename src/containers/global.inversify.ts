@@ -1,6 +1,6 @@
 import { Container } from 'inversify';
 import UIStore from '../stores/UIStore';
-import TYPES from './global.types';
+import Bindings from './global.bindings';
 
 /**
  * container that holds all the stores and should be used on inversify provider
@@ -23,7 +23,7 @@ import TYPES from './global.types';
 export default function globalContainer() {
   const container = new Container();
 
-  container.bind(TYPES.UIStore).to(UIStore).inSingletonScope();
+  container.bind(Bindings.UIStore).to(UIStore).inSingletonScope();
 
   return container;
 }
