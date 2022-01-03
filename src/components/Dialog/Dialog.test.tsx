@@ -1,11 +1,11 @@
 import 'reflect-metadata';
-
+import Bindings from '../../containers/global.bindings';
 import { UIStoreType } from '@stores/types';
+import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
 import { Dialog, globalContainer } from 'index';
 import { Container } from 'inversify';
 import { Provider } from 'inversify-react';
-import Bindings from '../../containers/global.bindings';
 
 describe('Dialog', () => {
   let onRejectSpy: jest.Mock;
@@ -34,7 +34,11 @@ describe('Dialog', () => {
       content: 'Test content',
     });
 
-    expect(screen.getByText(/Test content/i)).not.toBeNull();
+    expect(screen.queryByText('Test content')).toBeNull();
+
+    uiStore.dialog.open();
+
+    expect(screen.queryByText('Test content')).not.toBeNull();
   });
 
   it('should call onAccept function when the user clicks', async () => {
@@ -47,7 +51,9 @@ describe('Dialog', () => {
       content: 'Test content',
     });
 
-    (await screen.findByText(/Confirm/i)).click();
+    uiStore.dialog.open();
+
+    (await screen.findByText('Confirm')).click();
     expect(onAcceptSpy).toHaveBeenCalled();
   });
 
@@ -60,6 +66,8 @@ describe('Dialog', () => {
       onAccept: onAcceptSpy,
       content: 'Test content',
     });
+
+    uiStore.dialog.open();
 
     (await screen.findByText(/Cancel/i)).click();
     expect(onRejectSpy).toHaveBeenCalled();
@@ -75,6 +83,8 @@ describe('Dialog', () => {
       content: <div>Test content</div>,
     });
 
+    uiStore.dialog.open();
+
     expect(screen.getByText(/Test content/i)).not.toBeNull();
   });
 
@@ -88,6 +98,8 @@ describe('Dialog', () => {
       content: 'Test content 1',
     });
 
+    uiStore.dialog.open();
+
     expect(screen.getByText(/Test content 1/i)).not.toBeNull();
 
     uiStore.dialog.set({
@@ -97,6 +109,27 @@ describe('Dialog', () => {
       content: 'Test content 2',
     });
 
+    uiStore.dialog.open();
+
     expect(screen.getByText(/Test content 2/i)).not.toBeNull();
+  });
+
+  it('should reset an existing dialog', () => {
+    const uiStore = unitContainer.get<UIStoreType>(Bindings.UIStore);
+
+    uiStore.dialog.set({
+      title: 'Test title',
+      onReject: onRejectSpy,
+      onAccept: onAcceptSpy,
+      content: 'Test content 1',
+    });
+
+    uiStore.dialog.open();
+
+    expect(screen.getByText(/Test content 1/i)).not.toBeNull();
+
+    uiStore.dialog.reset();
+
+    expect(screen.queryByText(/Test content 1/i)).toBeNull();
   });
 });
