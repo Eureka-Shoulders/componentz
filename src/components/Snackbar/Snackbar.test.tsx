@@ -1,7 +1,7 @@
 import 'reflect-metadata';
-
 import {
   getByTestId,
+  queryByText,
   render,
   RenderResult,
   screen,
@@ -11,7 +11,7 @@ import { globalContainer, Snackbar } from 'index';
 import { Container } from 'inversify';
 import { Provider } from 'inversify-react';
 import Bindings from '../../containers/global.bindings';
-import { UIStoreType } from '../../stores/types';
+import { UIStoreType } from '@stores/types';
 
 jest.setTimeout(30000);
 
@@ -32,11 +32,25 @@ describe('Snackbar', () => {
     );
   });
 
-  it('should renders correctly', async () => {
+  it('should render colored snackbar correctly', async () => {
     const uiStore = unitContainer.get<UIStoreType>(Bindings.UIStore);
     uiStore.snackbar.show({
       message: 'message',
       severity: 'error',
+      actionLabel: 'action label test',
+      onActionClick: onActionSpy,
+    });
+
+    expect(await screen.findByText(/message/i)).not.toBeNull();
+    await waitFor(() => {
+      expect(getByTestId(mockedSnackbar.container, 'snackbar')).not.toBeNull();
+    });
+  });
+
+  it('should render simple snackbar correctly', async () => {
+    const uiStore = unitContainer.get<UIStoreType>(Bindings.UIStore);
+    uiStore.snackbar.show({
+      message: 'message',
       actionLabel: 'action label test',
       onActionClick: onActionSpy,
     });
@@ -149,20 +163,26 @@ describe('Snackbar', () => {
       severity: 'warning',
     });
 
-    expect(await screen.findByText(/Hello World/i)).not.toBeNull();
+    expect(queryByText(mockedSnackbar.container, 'Hello World')).not.toBeNull();
 
     await waitFor(
       () => {
-        expect(screen.findByText(/I'm a second snackbar/i)).not.toBeNull();
+        expect(
+          queryByText(mockedSnackbar.container, "I'm a second snackbar")
+        ).not.toBeNull();
       },
       { timeout: 3500 }
     );
 
     await waitFor(
       () => {
-        expect(screen.findByText(/I'm a second snackbar/i)).not.toBeNull();
+        expect(
+          queryByText(mockedSnackbar.container, "I'm a third snackbar")
+        ).not.toBeNull();
       },
-      { timeout: 3500 }
+      {
+        timeout: 3500,
+      }
     );
   });
 });
