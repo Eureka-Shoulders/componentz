@@ -1,3 +1,5 @@
+import useUIStore from '../../hooks/useUIStore';
+import { DialogProps } from './types';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { Backdrop } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -5,9 +7,7 @@ import MuiDialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import useUIStore from '../../hooks/useUIStore';
 import { observer } from 'mobx-react-lite';
-import { DialogProps } from './types';
 
 /**
  * @returns A component that displays a Dialog and should be controlled by the UIStore
@@ -26,12 +26,7 @@ function Dialog({
       open={uiStore.dialog.isOpen}
       onClick={uiStore.dialog.close}
     >
-      <MuiDialog
-        {...rest}
-        open={uiStore.dialog.isOpen}
-        keepMounted
-        data-testid="dialog"
-      >
+      <MuiDialog {...rest} open={uiStore.dialog.isOpen} data-testid="dialog">
         {uiStore.dialog.title ? (
           <DialogTitle>{uiStore.dialog.title}</DialogTitle>
         ) : null}
