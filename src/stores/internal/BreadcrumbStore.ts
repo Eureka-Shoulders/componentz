@@ -10,9 +10,18 @@ class BreadcrumbStore implements BreadcrumbStoreType {
   }
 
   paths: BreadcrumbPath[] = [];
+  onClickBreadcrumbPath: (breadcrumbPath: BreadcrumbPath) => void = () => {
+    return;
+  };
 
   setPaths(paths: BreadcrumbPath[]) {
     this.paths = paths;
+  }
+
+  setOnClickBreadcrumbPath(
+    newAction: (breadcrumbPath: BreadcrumbPath) => void
+  ) {
+    this.onClickBreadcrumbPath = newAction;
   }
 
   get finalPath() {
