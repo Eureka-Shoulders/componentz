@@ -18,21 +18,20 @@ const DrawerItem = ({ page }: DrawerItemProps) => {
   const uiStore = useUIStore();
 
   const drawerSubPages = page.sub?.filter(
-    (subPage) => subPage.drawer !== false
+    (subPage) => subPage.drawer !== false && subPage.disabled !== true
   );
 
   const handleClick = (page: Page, haveSub?: boolean) => {
     return () => {
       if (haveSub) {
-        if (uiStore.appBar.isDrawerOpen) {
-          uiStore.appBar.onClickDrawerOption(page);
-          setExpanded(false);
-          return;
+        if (!uiStore.appBar.isDrawerOpen) {
+          uiStore.appBar.toggleDrawer();
         }
 
-        uiStore.appBar.onClickDrawerOption(page);
         return setExpanded(!expanded);
       }
+
+      return uiStore.appBar.onClickDrawerOption(page);
     };
   };
 
@@ -69,7 +68,11 @@ const DrawerItem = ({ page }: DrawerItemProps) => {
       >
         <List component="div" disablePadding>
           {page.sub?.map((subPage) => (
-            <ListItemButton sx={{ pl: 4 }} key={subPage.link}>
+            <ListItemButton
+              sx={{ pl: 4 }}
+              key={subPage.link}
+              onClick={handleClick(subPage, false)}
+            >
               <ListItemIcon>
                 <subPage.Icon />
               </ListItemIcon>

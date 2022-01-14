@@ -1,6 +1,6 @@
-import { BreadcrumbPath } from '../components/Breadcrumbs/types';
-import { ReactNode } from 'react';
+import { BreadcrumbPath } from '@components/Breadcrumbs/types';
 import { Page } from '@components/AppBar/types';
+import { ReactNode } from 'react';
 
 export interface UIStoreType {
   snackbar: SnackbarStoreType;
@@ -34,14 +34,19 @@ export interface DialogStoreType {
   set(options: DialogOptions): void;
   open(): void;
   close(): void;
+  reset(): void;
 }
 
 export interface BreadcrumbStoreType {
   paths: BreadcrumbPath[];
   linkedPaths: BreadcrumbPath[];
   finalPath: string | undefined;
+  onClickBreadcrumbPath: (breadcrumbPath: BreadcrumbPath) => void;
 
   setPaths(paths: BreadcrumbPath[]): void;
+  setOnClickBreadcrumbPath(
+    newAction: (breadcrumbPath: BreadcrumbPath) => void
+  ): void;
 }
 
 export interface AppBarStoreType {

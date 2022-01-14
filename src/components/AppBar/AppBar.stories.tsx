@@ -7,7 +7,6 @@ import {
   Flight,
 } from '@mui/icons-material';
 import { Box, Typography } from '@mui/material';
-import { action } from '@storybook/addon-actions';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useEffect } from 'react';
 import AppBar from '.';

@@ -38,7 +38,7 @@
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.2.5",
     "@mui/lab": "^5.0.0-alpha.61",
-    "@mui/material": "^5.2.5",
+    "@mui/material": "^5.2.6",
     "@storybook/addon-actions": "^6.4.0",
     "@storybook/addon-essentials": "^6.4.0",
     "@storybook/addon-interactions": "^6.4.0",
@@ -59,7 +59,7 @@
     "babel-jest": "^27.4.5",
     "babel-loader": "^8.2.3",
     "chromatic": "^6.3.3",
-    "esbuild": "^0.14.8",
+    "esbuild": "^0.14.11",
     "eslint": "^8.5.0",
     "eslint-plugin-react": "^7.28.0",
     "husky": "^7.0.4",
@@ -72,6 +72,7 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "ts-jest": "^27.1.2",
+    "tsc-alias": "^1.5.0",
     "tslib": "^2.3.1",
     "typescript": "^4.5.4"
   },
@@ -87,8 +88,8 @@
     "react-dom": ">=17"
   },
   "dependencies": {
-    "ramda": ">=0.27.1",
     "inversify": ">=6.0.1",
-    "inversify-react": ">=1.0.1"
+    "inversify-react": ">=1.0.1",
+    "ramda": ">=0.27.1"
   }
 }

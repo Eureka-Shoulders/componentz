@@ -26,7 +26,7 @@ const AppBar = ({ children }: AppBarProps) => {
         <Divider />
         <List>
           {uiStore.appBar.pages
-            .filter((page) => page.drawer !== false)
+            .filter((page) => page.drawer !== false && page.disabled !== true)
             .map((page) => (
               <DrawerItem key={page.link} page={page} />
             ))}
