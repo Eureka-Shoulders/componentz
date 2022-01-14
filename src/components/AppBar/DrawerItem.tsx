@@ -18,7 +18,7 @@ const DrawerItem = ({ page }: DrawerItemProps) => {
   const uiStore = useUIStore();
 
   const drawerSubPages = page.sub?.filter(
-    (subPage) => subPage.drawer !== false
+    (subPage) => subPage.drawer !== false && subPage.disabled !== false
   );
 
   const handleClick = (page: Page, haveSub?: boolean) => {
