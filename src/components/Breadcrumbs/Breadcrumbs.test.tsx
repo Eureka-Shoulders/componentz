@@ -49,10 +49,11 @@ describe('Breadcrumbs', () => {
   it('should call onClick function when the user clicks', async () => {
     const uiStore = unitContainer.get<UIStoreType>(Bindings.UIStore);
 
+    uiStore.breadcrumb.setOnClickBreadcrumbPath(onClickSpy);
+
     uiStore.breadcrumb.setPaths([
       {
         label: 'Home',
-        onClick: onClickSpy,
       },
       {
         label: 'About',

@@ -41,8 +41,12 @@ export interface BreadcrumbStoreType {
   paths: BreadcrumbPath[];
   linkedPaths: BreadcrumbPath[];
   finalPath: string | undefined;
+  onClickBreadcrumbPath: (breadcrumbPath: BreadcrumbPath) => void;
 
   setPaths(paths: BreadcrumbPath[]): void;
+  setOnClickBreadcrumbPath(
+    newAction: (breadcrumbPath: BreadcrumbPath) => void
+  ): void;
 }
 
 export interface AppBarStoreType {
