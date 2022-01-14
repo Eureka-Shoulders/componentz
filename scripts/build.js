@@ -4,6 +4,7 @@ const rimraf = require('rimraf');
 const esbuild = require('esbuild');
 const fs = require('fs');
 const path = require('path');
+const tscAlias = require('tsc-alias');
 
 const distFolder = './lib';
 const sourceFolder = './src';
@@ -26,48 +27,54 @@ function getInputs(dir, result = []) {
 }
 
 const inputs = getInputs(sourceFolder);
+const commomEsbuildOptions = {
+  entryPoints: [...inputs],
+  outbase: sourceFolder,
+  jsx: 'transform',
+  jsxFactory: 'React.createElement',
+  jsxFragment: 'React.Fragment',
+  target: 'es6',
+  loader: {
+    '.json': 'json',
+    '.tsx': 'tsx',
+    '.ts': 'ts',
+  },
+  minify: true,
+  inject: ['./scripts/react-shim.js'],
+};
 
-rimraf(distFolder, (err) => {
+rimraf(distFolder, async (err) => {
   if (err) console.error(err);
 
   console.time('Generating ESM output...');
-  esbuild.buildSync({
-    entryPoints: [...inputs],
+  await esbuild.build({
+    ...commomEsbuildOptions,
     format: 'esm',
-    outbase: sourceFolder,
     outdir: distFolder,
-    jsx: 'transform',
-    jsxFactory: 'React.createElement',
-    jsxFragment: 'React.Fragment',
-    target: 'es6',
-    loader: {
-      '.json': 'json',
-    },
-    tsconfig: 'tsconfig.json',
-    minify: true,
-    inject: ['./scripts/react-shim.js'],
     splitting: true,
+    treeShaking: true,
   });
   console.timeEnd('Generating ESM output...');
 
   console.time('Generating CJS output...');
-  esbuild.buildSync({
-    entryPoints: [...inputs],
+  await esbuild.build({
+    ...commomEsbuildOptions,
     format: 'cjs',
-    outbase: sourceFolder,
     outdir: distFolder + '/cjs',
-    jsx: 'transform',
-    jsxFactory: 'React.createElement',
-    jsxFragment: 'React.Fragment',
-    target: 'es6',
-    loader: {
-      '.json': 'json',
-    },
-    tsconfig: 'tsconfig.json',
-    minify: true,
-    inject: ['./scripts/react-shim.js'],
   });
   console.timeEnd('Generating CJS output...');
+
+  await tscAlias.replaceTscAliasPaths({
+    configFile: './tsconfig.json',
+    outDir: './lib/cjs',
+    declarationDir: './lib/cjs',
+  });
+
+  await tscAlias.replaceTscAliasPaths({
+    configFile: './tsconfig.json',
+    outDir: './lib',
+    declarationDir: './lib',
+  });
 
   fs.copyFileSync(
     path.join('./package.json'),
