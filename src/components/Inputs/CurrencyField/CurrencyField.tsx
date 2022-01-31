@@ -17,7 +17,7 @@ const MoneyFormat = React.forwardRef<
   );
 });
 
-const CurrencyField = (props: TextFieldProps) => {
+function CurrencyField(props: TextFieldProps) {
   return (
     <TextField
       {...props}
@@ -29,6 +29,6 @@ const CurrencyField = (props: TextFieldProps) => {
       }}
     />
   );
-};
+}
 
 export default CurrencyField;

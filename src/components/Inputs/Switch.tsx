@@ -19,7 +19,7 @@ export type SwitchProps = {
   SwitchComponent?: (props: MuiSwitchProps) => React.ReactElement;
 } & MuiSwitchProps;
 
-const Switch = ({
+function Switch({
   label,
   formControlLabelProps,
   formGroupProps,
@@ -27,7 +27,7 @@ const Switch = ({
   helperText,
   SwitchComponent,
   ...props
-}: SwitchProps) => {
+}: SwitchProps) {
   if (label) {
     return (
       <FormControl {...formControlProps}>
@@ -53,6 +53,6 @@ const Switch = ({
   ) : (
     <Switch {...props} />
   );
-};
+}
 
 export default Switch;

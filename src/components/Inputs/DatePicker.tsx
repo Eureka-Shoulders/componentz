@@ -19,7 +19,7 @@ export type DatePickerProps = {
   datePickerValue: Date | string | undefined;
 } & Omit<MuiDatePickerProps, 'renderInput' | 'onChange' | 'value'>;
 
-const DatePicker = ({
+function DatePicker({
   label,
   textFieldProps,
   dateAdapter,
@@ -27,7 +27,7 @@ const DatePicker = ({
   onDatePickerChange,
   datePickerValue,
   ...props
-}: DatePickerProps) => {
+}: DatePickerProps) {
   return (
     <LocalizationProvider
       {...localizationProviderProps}
@@ -44,6 +44,6 @@ const DatePicker = ({
       />
     </LocalizationProvider>
   );
-};
+}
 
 export default DatePicker;

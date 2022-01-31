@@ -6,17 +6,17 @@ export type MaskedFieldProps = {
   textFieldProps?: TextFieldProps;
 } & InputMaskProps;
 
-const MaskedField = ({
+function MaskedField({
   label,
   mask,
   textFieldProps,
   ...props
-}: MaskedFieldProps) => {
+}: MaskedFieldProps) {
   return (
     <InputMask mask={mask} {...props}>
       {() => <TextField {...textFieldProps} label={label} fullWidth />}
     </InputMask>
   );
-};
+}
 
 export default MaskedField;

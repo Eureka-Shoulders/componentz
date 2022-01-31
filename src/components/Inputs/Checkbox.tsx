@@ -19,7 +19,7 @@ export type CheckboxProps = {
   CheckboxComponent?: (props: CheckboxProps) => React.ReactElement;
 } & MuiCheckboxProps;
 
-const Checkbox = ({
+function Checkbox({
   label,
   CheckboxComponent,
   formControlLabelProps,
@@ -27,7 +27,7 @@ const Checkbox = ({
   formControlProps,
   helperText,
   ...props
-}: CheckboxProps) => {
+}: CheckboxProps) {
   if (label) {
     return (
       <FormControl {...formControlProps}>
@@ -53,6 +53,6 @@ const Checkbox = ({
   ) : (
     <MuiCheckbox {...props} />
   );
-};
+}
 
 export default Checkbox;

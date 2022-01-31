@@ -28,14 +28,14 @@ export type RadioGroupProps = {
   options: IRadioOption[];
 };
 
-const RadioGroup = ({
+function RadioGroup({
   helperText,
   label,
   radioGroupProps,
   formLabelProps,
   formControlProps,
   options,
-}: RadioGroupProps) => {
+}: RadioGroupProps) {
   return (
     <FormControl {...formControlProps}>
       <FormLabel {...formLabelProps}>{label}</FormLabel>
@@ -53,6 +53,6 @@ const RadioGroup = ({
       <FormHelperText>{helperText}</FormHelperText>
     </FormControl>
   );
-};
+}
 
 export default RadioGroup;

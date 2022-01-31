@@ -7,7 +7,7 @@ import { format, isAfter, isBefore } from 'date-fns';
 import CustomPickersDay from './CustomPickersDay';
 import DateRangePickerStore from './store';
 
-function renderCustomDay(
+function RenderCustomDay(
   value: {
     start: Date | null;
     end: Date | null;
@@ -74,7 +74,7 @@ type BaseCalendarPickerProps = {
   onChange: (value: { start: Date | null; end: Date | null }) => void;
 };
 
-export default function BaseCalendarPicker({
+function BaseCalendarPicker({
   value,
   store,
   onChange,
@@ -154,8 +154,10 @@ export default function BaseCalendarPicker({
   return (
     <MuiCalendarPicker
       date={value.start}
-      renderDay={renderCustomDay(value, store)}
+      renderDay={RenderCustomDay(value, store)}
       onChange={handleChange}
     />
   );
 }
+
+export default BaseCalendarPicker;
