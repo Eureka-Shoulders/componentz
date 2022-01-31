@@ -16,7 +16,12 @@ export type CustomProps = {
 
 const NumberFormat = React.forwardRef<HTMLElement, CustomProps>(
   function NumberFormat(props, ref) {
-    const { onChange, decimalScale, thousandSeparator, ...rest } = props;
+    const {
+      onChange,
+      decimalScale = 2,
+      thousandSeparator = '.',
+      ...rest
+    } = props;
     return (
       <RNFNumberFormat
         {...rest}
@@ -45,10 +50,5 @@ const NumberFormat = React.forwardRef<HTMLElement, CustomProps>(
     );
   }
 );
-
-NumberFormat.defaultProps = {
-  decimalScale: 2,
-  thousandSeparator: '.',
-};
 
 export default NumberFormat;
