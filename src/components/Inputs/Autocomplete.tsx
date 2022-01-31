@@ -1,6 +1,6 @@
 import {
   Autocomplete as MuiAutocomplete,
-  AutocompleteProps,
+  AutocompleteProps as MuiAutocompleteProps,
   AutocompleteRenderOptionState,
   Checkbox,
   CircularProgress,
@@ -11,32 +11,35 @@ import {
 } from '@mui/material';
 import React, { useCallback, useEffect, useState } from 'react';
 
-const filter = createFilterOptions();
+function filterOptions<T>(options: T[], state: FilterOptionsState<T>) {
+  const filteredOptions = createFilterOptions<T>();
+  return filteredOptions(options, state);
+}
 
-export type InternalAutocompleteProps = {
+export type AutocompleteProps<T> = {
   label?: string;
   textFieldProps?: TextFieldProps;
   checkbox?: boolean;
-  options: any[];
-  buildNew?: (value: string) => any;
+  options: T[];
+  buildNew?: (value: string) => T;
   debounce?: number;
   onDebouncedInputChange?: (value: string) => void;
 } & Omit<
-  AutocompleteProps<any, true | false, true | false, true | false>,
+  MuiAutocompleteProps<any, true | false, true | false, true | false>,
   'renderInput'
 >;
 
-const defaultFilterOptions =
-  (buildNew: InternalAutocompleteProps['buildNew']) =>
-  (options: any[], state: FilterOptionsState<any>) => {
-    const filtered = filter(options, state);
+function defaultFilterOptions<T>(buildNew: AutocompleteProps<T>['buildNew']) {
+  return (options: T[], state: FilterOptionsState<T>) => {
+    const filtered = filterOptions(options, state);
     if (!!buildNew && state.inputValue !== '') {
       filtered.push(buildNew(state.inputValue));
     }
     return filtered;
   };
+}
 
-const Autocomplete = ({
+function Autocomplete<T>({
   label,
   textFieldProps,
   checkbox,
@@ -45,7 +48,7 @@ const Autocomplete = ({
   debounce,
   onDebouncedInputChange,
   ...props
-}: InternalAutocompleteProps) => {
+}: AutocompleteProps<T>) {
   const [inputValue, setInputValue] = useState('');
 
   useEffect(() => {
@@ -67,7 +70,7 @@ const Autocomplete = ({
   const withCheckboxOptionRenderer = useCallback(
     (
       params: React.HTMLAttributes<HTMLLIElement>,
-      option: any,
+      option: T,
       state: AutocompleteRenderOptionState
     ) => (
       <li {...params}>
@@ -111,6 +114,6 @@ const Autocomplete = ({
       )}
     />
   );
-};
+}
 
 export default Autocomplete;

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import {
   default as RNFNumberFormat,
@@ -37,7 +38,7 @@ const NumberFormat = React.forwardRef<HTMLElement, CustomProps>(
           const { formattedValue, floatValue } = values;
           const correctedFloatValue = floatValue || 0;
           return (
-            formattedValue === '' || correctedFloatValue <= 999999999999999.99
+            formattedValue === '' || correctedFloatValue <= 9999999999999.99
           );
         }}
       />
