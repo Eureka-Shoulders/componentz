@@ -5,15 +5,9 @@ import { grey } from '@mui/material/colors';
 import { format, isAfter, isBefore } from 'date-fns';
 
 import CustomPickersDay from './CustomPickersDay';
-import DateRangePickerStore from './store';
+import DateRangePickerStore, { DateRange } from './store';
 
-function RenderCustomDay(
-  value: {
-    start: Date | null;
-    end: Date | null;
-  },
-  store: DateRangePickerStore
-) {
+function RenderCustomDay(value: DateRange, store: DateRangePickerStore) {
   return (
     date: Date,
     _selectedDates: (Date | null)[],
@@ -67,11 +61,8 @@ function RenderCustomDay(
 
 type BaseCalendarPickerProps = {
   store: DateRangePickerStore;
-  value: {
-    start: Date | null;
-    end: Date | null;
-  };
-  onChange: (value: { start: Date | null; end: Date | null }) => void;
+  value: DateRange;
+  onChange: (value: DateRange) => void;
 };
 
 function BaseCalendarPicker({

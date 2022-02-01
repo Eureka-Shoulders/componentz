@@ -1,13 +1,15 @@
 import { endOfDay, format, isWithinInterval, startOfDay } from 'date-fns';
 import { makeAutoObservable } from 'mobx';
 
+export type DateRange = {
+  start: Date | null;
+  end: Date | null;
+};
+
 class DateRangePickerStore {
   firstMonth = new Date();
   secondMonth = new Date();
-  values: {
-    start: Date | null;
-    end: Date | null;
-  };
+  values: DateRange;
   open = false;
   fieldValue = '';
   helperText = '';
@@ -29,12 +31,12 @@ class DateRangePickerStore {
     this.open = open;
   }
 
-  constructor(values: { start: Date | null; end: Date | null }) {
+  constructor(values: DateRange) {
     makeAutoObservable(this, {}, { autoBind: true });
     this.values = values;
   }
 
-  setValues(values: { start: Date | null; end: Date | null }) {
+  setValues(values: DateRange) {
     this.values = values;
   }
 
