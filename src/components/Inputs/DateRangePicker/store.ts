@@ -31,12 +31,12 @@ class DateRangePickerStore {
     this.open = open;
   }
 
-  constructor(values: { start: Date | null; end: Date | null }) {
+  constructor(values: DateRange) {
     makeAutoObservable(this, {}, { autoBind: true });
     this.values = values;
   }
 
-  setValues(values: { start: Date | null; end: Date | null }) {
+  setValues(values: DateRange) {
     this.values = values;
   }
 

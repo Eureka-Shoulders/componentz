@@ -2,6 +2,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import { IconButton, InputAdornment, TextFieldProps } from '@mui/material';
 import { isAfter, isEqual, isValid, parse, isBefore } from 'date-fns';
+import { observer } from 'mobx-react-lite';
 import MaskedField from '../MaskedField';
 
 import DateRangePickerStore, { DateRange } from './store';
@@ -32,6 +33,7 @@ function DateRangeMaskedInput({
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
     const fieldValue = e.target.value;
     const fDate = parse(fieldValue.substring(0, 10), 'dd/MM/yyyy', new Date());
     const sDate = parse(fieldValue.substring(14, 24), 'dd/MM/yyyy', new Date());
@@ -115,4 +117,4 @@ function DateRangeMaskedInput({
   );
 }
 
-export default DateRangeMaskedInput;
+export default observer(DateRangeMaskedInput);

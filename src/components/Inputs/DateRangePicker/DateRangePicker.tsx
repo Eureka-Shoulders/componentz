@@ -5,6 +5,7 @@ import {
 } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { Popover } from '@mui/material';
+import { observer } from 'mobx-react-lite';
 import { useRef, useState } from 'react';
 
 import BaseCalendarPicker from './CalendarPicker';
@@ -57,4 +58,4 @@ function DateRangePicker({
   );
 }
 
-export default DateRangePicker;
+export default observer(DateRangePicker);

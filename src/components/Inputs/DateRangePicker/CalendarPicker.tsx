@@ -7,13 +7,7 @@ import { format, isAfter, isBefore } from 'date-fns';
 import CustomPickersDay from './CustomPickersDay';
 import DateRangePickerStore, { DateRange } from './store';
 
-function RenderCustomDay(
-  value: {
-    start: Date | null;
-    end: Date | null;
-  },
-  store: DateRangePickerStore
-) {
+function RenderCustomDay(value: DateRange, store: DateRangePickerStore) {
   return (
     date: Date,
     _selectedDates: (Date | null)[],
@@ -67,10 +61,7 @@ function RenderCustomDay(
 
 type BaseCalendarPickerProps = {
   store: DateRangePickerStore;
-  value: {
-    start: Date | null;
-    end: Date | null;
-  };
+  value: DateRange;
   onChange: (value: DateRange) => void;
 };
 
@@ -80,6 +71,7 @@ function BaseCalendarPicker({
   onChange,
 }: BaseCalendarPickerProps) {
   const handleChange = (date: Date | null) => {
+    console.log(date);
     if (value.start && value.end && isBefore(date as Date, value.end)) {
       store.setValues({
         start: date,
