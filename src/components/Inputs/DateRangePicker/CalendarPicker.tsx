@@ -71,7 +71,6 @@ function BaseCalendarPicker({
   onChange,
 }: BaseCalendarPickerProps) {
   const handleChange = (date: Date | null) => {
-    console.log(date);
     if (value.start && value.end && isBefore(date as Date, value.end)) {
       store.setValues({
         start: date,

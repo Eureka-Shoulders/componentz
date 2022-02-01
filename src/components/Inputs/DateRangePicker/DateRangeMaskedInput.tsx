@@ -33,7 +33,6 @@ function DateRangeMaskedInput({
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
     const fieldValue = e.target.value;
     const fDate = parse(fieldValue.substring(0, 10), 'dd/MM/yyyy', new Date());
     const sDate = parse(fieldValue.substring(14, 24), 'dd/MM/yyyy', new Date());
