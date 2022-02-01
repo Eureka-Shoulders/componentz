@@ -49,6 +49,8 @@ describe('Dialog', () => {
       onReject: onRejectSpy,
       onAccept: onAcceptSpy,
       content: 'Test content',
+      rejectLabel: 'Reject',
+      acceptLabel: 'Confirm',
     });
 
     uiStore.dialog.open();
@@ -65,11 +67,13 @@ describe('Dialog', () => {
       onReject: onRejectSpy,
       onAccept: onAcceptSpy,
       content: 'Test content',
+      rejectLabel: 'Reject',
+      acceptLabel: 'Confirm',
     });
 
     uiStore.dialog.open();
 
-    (await screen.findByText(/Cancel/i)).click();
+    (await screen.findByText(/Reject/i)).click();
     expect(onRejectSpy).toHaveBeenCalled();
   });
 

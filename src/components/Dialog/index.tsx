@@ -13,20 +13,20 @@ import { observer } from 'mobx-react-lite';
  * @returns A component that displays a Dialog and should be controlled by the UIStore
  */
 
-function Dialog({
-  confirmLabel = 'Confirm',
-  cancelLabel = 'Cancel',
-  ...rest
-}: DialogProps) {
+function Dialog(props: DialogProps) {
   const uiStore = useUIStore();
 
   return (
     <Backdrop
       sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
       open={uiStore.dialog.isOpen}
-      onClick={uiStore.dialog.close}
     >
-      <MuiDialog {...rest} open={uiStore.dialog.isOpen} data-testid="dialog">
+      <MuiDialog
+        {...props}
+        open={uiStore.dialog.isOpen}
+        onClose={uiStore.dialog.close}
+        data-testid="dialog"
+      >
         {uiStore.dialog.title ? (
           <DialogTitle>{uiStore.dialog.title}</DialogTitle>
         ) : null}
@@ -34,7 +34,7 @@ function Dialog({
         <DialogActions>
           {uiStore.dialog.onReject && (
             <Button variant="outlined" onClick={uiStore.dialog.onReject}>
-              {cancelLabel}
+              {uiStore.dialog.rejectLabel}
             </Button>
           )}
           {uiStore.dialog.onAccept && (
@@ -44,7 +44,7 @@ function Dialog({
               color="primary"
               variant="contained"
             >
-              {confirmLabel}
+              {uiStore.dialog.acceptLabel}
             </LoadingButton>
           )}
         </DialogActions>
