@@ -30,7 +30,8 @@ export interface DialogStoreType {
   onAccept?: () => void;
   title?: string;
   content?: ReactNode;
-
+  acceptLabel?: string;
+  rejectLabel?: string;
   set(options: DialogOptions): void;
   open(): void;
   close(): void;
@@ -69,6 +70,8 @@ export interface DialogOptions {
   onReject?: () => void;
   onAccept?: () => void;
   content?: ReactNode;
+  acceptLabel?: string;
+  rejectLabel?: string;
 }
 
 export interface SnackbarOptions {

@@ -6,14 +6,14 @@ import {
 } from '@mui/material';
 import React from 'react';
 
-import BaseNumberFormat from './NumberFormat';
+import NumberFormat from './NumberFormat';
 
 const MoneyFormat = React.forwardRef<
   React.PropsWithChildren<InputBaseComponentProps>,
   any
 >(function MoneyFormat(props, ref) {
   return (
-    <BaseNumberFormat {...props} ref={ref} decimalScale={2} fixedDecimalScale />
+    <NumberFormat {...props} ref={ref} decimalScale={2} fixedDecimalScale />
   );
 });
 

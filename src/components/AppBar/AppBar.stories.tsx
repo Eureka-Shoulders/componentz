@@ -61,7 +61,7 @@ const Template: ComponentStory<typeof AppBar> = (args) => {
   return <AppBar {...args} />;
 };
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const Default = Template.bind({});
+Default.args = {
   children: 'Children Component Here',
 };

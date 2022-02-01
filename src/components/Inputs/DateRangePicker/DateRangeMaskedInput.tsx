@@ -2,18 +2,16 @@ import CloseIcon from '@mui/icons-material/Close';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import { IconButton, InputAdornment, TextFieldProps } from '@mui/material';
 import { isAfter, isEqual, isValid, parse, isBefore } from 'date-fns';
+import { observer } from 'mobx-react-lite';
 import MaskedField from '../MaskedField';
 
-import DateRangePickerStore from './store';
+import DateRangePickerStore, { DateRange } from './store';
 
 type DateRangeMaskedInputProps = {
   store: DateRangePickerStore;
-  value: {
-    start: Date | null;
-    end: Date | null;
-  };
+  value: DateRange;
   anchorRef: React.MutableRefObject<null>;
-  onChange: (value: { start: Date | null; end: Date | null }) => void;
+  onChange: (value: DateRange) => void;
   error?: boolean;
   helperText?: string;
   textFieldProps?: TextFieldProps;
@@ -30,7 +28,7 @@ function DateRangeMaskedInput({
   label,
   textFieldProps,
 }: DateRangeMaskedInputProps) {
-  const handleTogle = () => {
+  const handleToggle = () => {
     store.setOpen(!store.open);
   };
 
@@ -99,7 +97,7 @@ function DateRangeMaskedInput({
             <InputAdornment position="end">
               <IconButton
                 edge={value.start ? undefined : 'end'}
-                onClick={handleTogle}
+                onClick={handleToggle}
                 ref={anchorRef}
               >
                 <DateRangeIcon />
@@ -118,4 +116,4 @@ function DateRangeMaskedInput({
   );
 }
 
-export default DateRangeMaskedInput;
+export default observer(DateRangeMaskedInput);
