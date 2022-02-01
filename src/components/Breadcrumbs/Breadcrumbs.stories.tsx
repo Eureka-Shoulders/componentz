@@ -32,5 +32,4 @@ const Template: ComponentStory<typeof Breadcrumbs> = (args) => {
   return <Breadcrumbs {...args} />;
 };
 
-export const Primary = Template.bind({});
-Primary.args = {};
+export const Default = Template.bind({});

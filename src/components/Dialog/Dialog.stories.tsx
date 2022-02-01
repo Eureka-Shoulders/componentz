@@ -43,6 +43,8 @@ const Template: ComponentStory<typeof Dialog> = (args) => {
           and another element
         </Typography>
       ),
+      acceptLabel: 'Accept',
+      rejectLabel: 'Reject',
       onReject: () => onRejectAction('onReject clicked'),
       onAccept: () => onAcceptAction('onAccept clicked'),
     });
@@ -51,12 +53,7 @@ const Template: ComponentStory<typeof Dialog> = (args) => {
   return <Dialog {...args} />;
 };
 
-export const Primary = Template.bind({});
-Primary.args = {
-  title: 'Dialog Title',
-  confirmLabel: 'Confirm',
-  cancelLabel: 'Cancel',
-};
+export const Default = Template.bind({});
 
 export const Custom = ({
   title,
@@ -75,6 +72,8 @@ export const Custom = ({
     uiStore.dialog.set({
       title,
       content: <Typography>{content}</Typography>,
+      acceptLabel: 'Accept',
+      rejectLabel: 'Reject',
       onReject: onReject ? () => onRejectAction('onReject clicked') : undefined,
       onAccept: onAccept ? () => onAcceptAction('onAccept clicked') : undefined,
     });

@@ -9,21 +9,18 @@ import { useRef, useState } from 'react';
 
 import BaseCalendarPicker from './CalendarPicker';
 import DateRangeMaskedInput from './DateRangeMaskedInput';
-import DateRangePickerStore from './store';
+import DateRangePickerStore, { DateRange } from './store';
 
 export type DateRangePickerProps = Omit<
   DesktopDatePickerProps,
-  'renderInput'
+  'renderInput' | 'onChange'
 > & {
   renderInput?: DesktopDatePickerProps['renderInput'];
-  onChange: (value: { start: Date | null; end: Date | null }) => void;
+  onChange: (value: DateRange) => void;
   localizationProviderProps?: Omit<LocalizationProviderProps, 'dateAdapter'>;
   dateAdapter?: LocalizationProviderProps['dateAdapter'];
   label?: string;
-  value: {
-    start: Date | null;
-    end: Date | null;
-  };
+  value: DateRange;
 };
 
 function DateRangePicker({
@@ -31,6 +28,7 @@ function DateRangePicker({
   localizationProviderProps,
   dateAdapter,
   label,
+  onChange,
   ...props
 }: DateRangePickerProps) {
   const [store] = useState(() => new DateRangePickerStore(value));
@@ -46,18 +44,14 @@ function DateRangePicker({
         store={store}
         value={value}
         anchorRef={anchorRef}
-        onChange={props.onChange}
+        onChange={onChange}
       />
       <Popover
         open={store.open}
         anchorEl={anchorRef.current}
         onClose={() => store.setOpen(false)}
       >
-        <BaseCalendarPicker
-          onChange={props.onChange}
-          value={value}
-          store={store}
-        />
+        <BaseCalendarPicker onChange={onChange} value={value} store={store} />
       </Popover>
     </LocalizationProvider>
   );
