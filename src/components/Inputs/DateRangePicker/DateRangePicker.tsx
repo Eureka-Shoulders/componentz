@@ -52,7 +52,12 @@ function DateRangePicker({
         anchorEl={anchorRef.current}
         onClose={() => store.setOpen(false)}
       >
-        <BaseCalendarPicker onChange={onChange} value={value} store={store} />
+        <BaseCalendarPicker
+          {...props}
+          onChange={onChange}
+          value={value}
+          store={store}
+        />
       </Popover>
     </LocalizationProvider>
   );

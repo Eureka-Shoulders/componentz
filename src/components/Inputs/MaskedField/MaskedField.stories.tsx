@@ -8,7 +8,7 @@ export default {
   component: MaskedField,
 } as ComponentMeta<typeof MaskedField>;
 
-const Template: ComponentStory<typeof MaskedField> = (args) => {
+const Template: ComponentStory<typeof MaskedField> = () => {
   const [value, setValue] = useState('');
 
   return (
