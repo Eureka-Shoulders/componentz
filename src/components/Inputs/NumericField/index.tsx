@@ -9,7 +9,7 @@ export interface HTMLNumericElement
 }
 
 export type NumericInputProps = Omit<TextFieldProps, 'onChange'> & {
-  value?: number | string;
+  value?: number | string | null;
   onChange?(e: React.ChangeEvent<HTMLNumericElement>): void;
 
   precision: number;
