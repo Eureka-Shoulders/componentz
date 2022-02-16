@@ -28,6 +28,7 @@ function verifyNumber(string: string) {
   };
 }
 
+// TODO: support negative numbers
 function NumericField(props: NumericInputProps) {
   const { value, precision, thousandChar, decimalChar, ...inputProps } = props;
   const defaultValue = value === null ? NaN : Number(value);
