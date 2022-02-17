@@ -1,16 +1,16 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useState } from 'react';
-import CurrencyField from '.';
+import NumericField from '.';
 
 export default {
-  title: 'CurrencyField',
-  component: CurrencyField,
-} as ComponentMeta<typeof CurrencyField>;
+  title: 'NumericField',
+  component: NumericField,
+} as ComponentMeta<typeof NumericField>;
 
-const Template: ComponentStory<typeof CurrencyField> = (args) => {
-  const [value, setValue] = useState('');
+const Template: ComponentStory<typeof NumericField> = (args) => {
+  const [value, setValue] = useState<number | string | null>(null);
   return (
-    <CurrencyField
+    <NumericField
       {...args}
       value={value}
       onChange={(e) => {
