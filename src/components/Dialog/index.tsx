@@ -17,6 +17,7 @@ function Dialog(props: DialogProps) {
   const uiStore = useUIStore();
   const showDialogActions =
     !!uiStore.dialog.onReject || !!uiStore.dialog.onAccept;
+  
   return (
     <Backdrop
       sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
