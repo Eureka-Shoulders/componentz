@@ -15,7 +15,8 @@ import { observer } from 'mobx-react-lite';
 
 function Dialog(props: DialogProps) {
   const uiStore = useUIStore();
-
+  const showDialogActions =
+    !!uiStore.dialog.onReject || !!uiStore.dialog.onAccept;
   return (
     <Backdrop
       sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
@@ -31,7 +32,7 @@ function Dialog(props: DialogProps) {
           <DialogTitle>{uiStore.dialog.title}</DialogTitle>
         ) : null}
         <DialogContent>{uiStore.dialog.content}</DialogContent>
-        {(!!uiStore.dialog.onReject || !!uiStore.dialog.onAccept) && (
+        {showDialogActions && (
           <DialogActions>
             {uiStore.dialog.onReject && (
               <Button variant="outlined" onClick={uiStore.dialog.onReject}>
