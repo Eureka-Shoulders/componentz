@@ -1,5 +1,5 @@
-export { default as CurrencyField } from './CurrencyField';
-export { default as NumberFormat } from './CurrencyField/NumberFormat';
+export { default as NumericField } from './NumericField';
+export * from './NumericField';
 export * from './DateRangePicker';
 export {
   default as Autocomplete,
