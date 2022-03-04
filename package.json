@@ -25,7 +25,8 @@
     "test:watch": "jest --watch",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "chromatic": "npx chromatic --exit-zero-on-changes"
+    "chromatic": "npx chromatic --exit-zero-on-changes",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@babel/core": "^7.16.5",
