@@ -9,6 +9,7 @@ import {
   TextFieldProps,
   createFilterOptions,
   debounce as muiDebounce,
+  AutocompleteInputChangeReason,
 } from '@mui/material';
 import React, { useCallback } from 'react';
 
@@ -75,9 +76,13 @@ function Autocomplete<T>({
     []
   );
 
-  function handleInputChange(value: string) {
+  function handleInputChange(
+    event: React.SyntheticEvent,
+    value: string,
+    reason: AutocompleteInputChangeReason
+  ) {
     if (!debounce) {
-      return null;
+      return props.onInputChange && props.onInputChange(event, value, reason);
     }
 
     if (onDebouncedInputChange) {
@@ -92,7 +97,7 @@ function Autocomplete<T>({
       fullWidth
       filterOptions={props.filterOptions || defaultFilterOptions(buildNew)}
       loading={props.loading}
-      onInputChange={(e, value) => handleInputChange(value)}
+      onInputChange={handleInputChange}
       renderOption={checkbox ? withCheckboxOptionRenderer : undefined}
       renderInput={(params) => (
         <TextField
