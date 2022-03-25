@@ -1,5 +1,5 @@
 import { PickersDay, PickersDayProps } from '@mui/lab';
-import { styled } from '@mui/material';
+import { darken, styled } from '@mui/material';
 
 type CustomPickersDayProps = {
   isIncluded: boolean;
@@ -15,7 +15,7 @@ const CustomPickersDay = styled((props: PickersDayProps<Date>) => (
       props.isSelected
         ? props.theme.palette.primary.dark
         : props.isIncluded
-        ? props.theme.palette.grey[400]
+        ? darken(props.theme.palette.background.paper, 0.2)
         : undefined};
 
     color: ${(props) =>
