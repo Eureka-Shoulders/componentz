@@ -1,13 +1,13 @@
 /* eslint-disable react/display-name */
 import { CalendarPicker as MuiCalendarPicker, PickersDayProps } from '@mui/lab';
-import { Box, darken, useTheme } from '@mui/material';
+import { Box } from '@mui/material';
+import { grey } from '@mui/material/colors';
 import { format, isAfter, isBefore } from 'date-fns';
 
 import CustomPickersDay from './CustomPickersDay';
 import DateRangePickerStore, { DateRange } from './store';
 
 function RenderCustomDay(value: DateRange, store: DateRangePickerStore) {
-  const theme = useTheme();
   return (
     date: Date,
     _selectedDates: (Date | null)[],
@@ -29,7 +29,7 @@ function RenderCustomDay(value: DateRange, store: DateRangePickerStore) {
 
     const getBoxColor = () => {
       if (isIncluded && !pickersDayProps.outsideCurrentMonth) {
-        return darken(theme.palette.background.paper, 0.1);
+        return grey[300];
       }
       return undefined;
     };
