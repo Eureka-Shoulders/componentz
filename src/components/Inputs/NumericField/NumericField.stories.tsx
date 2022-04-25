@@ -8,7 +8,7 @@ export default {
 } as ComponentMeta<typeof NumericField>;
 
 const Template: ComponentStory<typeof NumericField> = (args) => {
-  const [value, setValue] = useState<number | string | null>(null);
+  const [value, setValue] = useState<number | string>('');
   return (
     <NumericField
       {...args}
