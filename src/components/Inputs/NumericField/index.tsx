@@ -1,15 +1,15 @@
 import type { TextFieldProps } from '@mui/material';
 import { TextField } from '@mui/material';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
 export interface HTMLNumericElement
   extends Omit<HTMLInputElement, 'value' | 'name'> {
-  value: number | null | '';
+  value: number | '';
   name?: string;
 }
 
 export type NumericInputProps = Omit<TextFieldProps, 'onChange'> & {
-  value?: number | string | null;
+  value?: number | string;
   onChange?(e: React.ChangeEvent<HTMLNumericElement>): void;
 
   precision: number;
@@ -31,7 +31,7 @@ function verifyNumber(string: string) {
 // TODO: support negative numbers
 function NumericField(props: NumericInputProps) {
   const { value, precision, thousandChar, decimalChar, ...inputProps } = props;
-  const defaultValue = value === null ? NaN : Number(value);
+  const defaultValue = value === '' ? NaN : Number(value);
 
   const formatter = useMemo(
     () =>
@@ -40,7 +40,7 @@ function NumericField(props: NumericInputProps) {
         maximumFractionDigits: precision,
       }),
 
-    [thousandChar, decimalChar]
+    [thousandChar, decimalChar, precision]
   );
 
   if (!decimalChar) {
@@ -67,7 +67,10 @@ function NumericField(props: NumericInputProps) {
       e.shiftKey ||
       e.key === 'Backspace' ||
       e.key === 'Enter' ||
-      e.key === 'Tab'
+      e.key === 'Tab' ||
+      e.key === 'ArrowRight' ||
+      e.key === 'ArrowLeft' ||
+      e.key === 'Delete'
     )
       return;
     if (!verifyNumber(e.key).isNumber) e.preventDefault();
@@ -94,15 +97,15 @@ function NumericField(props: NumericInputProps) {
 
     if (numericRepresentation === '') {
       e.target.value = '';
-      newEvent.target.value = null;
-      newEvent.currentTarget.value = null;
+      newEvent.target.value = '';
+      newEvent.currentTarget.value = '';
       return props.onChange && props.onChange(newEvent);
     }
 
     const { isNumber, numberFomart } = verifyNumber(numericRepresentation);
-    if (isNumber && numberFomart) {
-      const withPrecision = numberFomart / 10 ** precision;
 
+    if (isNumber && numberFomart !== null && numberFomart >= 0) {
+      const withPrecision = numberFomart / 10 ** precision;
       const formattedNumber = format(withPrecision);
 
       newEvent.target.value = withPrecision;
@@ -120,7 +123,7 @@ function NumericField(props: NumericInputProps) {
 
   if (hasValue) {
     if (isNaN(defaultValue) || value === '') {
-      inputValue = null;
+      inputValue = '';
     } else {
       inputValue = format(defaultValue);
     }
