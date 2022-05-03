@@ -13,8 +13,8 @@ const Template: ComponentStory<typeof DatePicker> = (args) => {
   return (
     <DatePicker
       {...args}
-      onDatePickerChange={(newDate) => setDate(newDate as Date)}
-      datePickerValue={date}
+      onChange={(newDate) => setDate(newDate as Date)}
+      value={date}
     />
   );
 };
