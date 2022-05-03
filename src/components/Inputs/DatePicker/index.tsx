@@ -11,14 +11,22 @@ export type DatePickerProps = {
   value: Date | string | undefined;
 } & Omit<MuiDatePickerProps, 'renderInput' | 'onChange' | 'value'>;
 
-function DatePicker({ label, onChange, value, ...props }: DatePickerProps) {
+function DatePicker({
+  label,
+  onChange,
+  value,
+  textFieldProps,
+  ...props
+}: DatePickerProps) {
   return (
     <MuiDatePicker
       {...props}
       value={value}
       onChange={onChange}
       label={label}
-      renderInput={(params) => <TextField {...params} fullWidth />}
+      renderInput={(params) => (
+        <TextField {...params} fullWidth {...textFieldProps} />
+      )}
     />
   );
 }
