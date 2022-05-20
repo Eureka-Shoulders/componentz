@@ -29,7 +29,13 @@ export const DrawerHeader = styled('div')(({ theme }) => ({
   alignItems: 'center',
   padding: theme.spacing(0, 1),
   // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
+  minHeight: theme.mixins.toolbar.minHeight,
+  '@media (min-width:0px) and (orientation: landscape)': {
+    minHeight: 48,
+  },
+  '@media (min-width:600px)': {
+    minHeight: 64,
+  },
 }));
 
 export const StyledDrawer = styled(MuiDrawer, {
