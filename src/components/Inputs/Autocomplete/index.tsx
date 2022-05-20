@@ -98,7 +98,7 @@ function Autocomplete<T>({
       filterOptions={props.filterOptions || defaultFilterOptions(buildNew)}
       loading={props.loading}
       onInputChange={handleInputChange}
-      renderOption={checkbox ? withCheckboxOptionRenderer : undefined}
+      renderOption={checkbox ? withCheckboxOptionRenderer : props.renderOption}
       renderInput={(params) => (
         <TextField
           {...params}
