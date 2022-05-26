@@ -11,7 +11,7 @@ export type DateTimePickerProps = {
   value: Date | string | undefined;
 } & Omit<MuiDateTimePickerProps, 'renderInput' | 'onChange' | 'value'>;
 
-function DatePicker({
+function DateTimePicker({
   label,
   onChange,
   value,
@@ -31,4 +31,4 @@ function DatePicker({
   );
 }
 
-export default DatePicker;
+export default DateTimePicker;
