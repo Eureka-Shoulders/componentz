@@ -7,6 +7,10 @@ export {
 } from './Autocomplete';
 export { default as Checkbox, type CheckboxProps } from './Checkbox';
 export { default as DatePicker, type DatePickerProps } from './DatePicker';
+export {
+  default as DateTimePicker,
+  type DateTimePickerProps,
+} from './DateTimePicker';
 export { default as MaskedField, type MaskedFieldProps } from './MaskedField';
 export { default as PasswordField } from './PasswordField';
 export {
