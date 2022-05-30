@@ -51,7 +51,6 @@ rimraf(distFolder, async (err) => {
     ...commomEsbuildOptions,
     format: 'esm',
     outdir: distFolder,
-    splitting: true,
     treeShaking: true,
   });
   console.timeEnd('Generating ESM output...');
