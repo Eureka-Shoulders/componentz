@@ -32,9 +32,9 @@ function verifyNumber(string: string) {
 function NumericField(props: NumericInputProps) {
   const {
     value,
-    precision,
-    thousandChar,
-    decimalChar,
+    precision = 1,
+    thousandChar = '.',
+    decimalChar = ',',
     negative,
     ...inputProps
   } = props;
