@@ -13,9 +13,9 @@ export type NumericInputProps = Omit<TextFieldProps, 'onChange'> & {
   onChange?(e: React.ChangeEvent<HTMLNumericElement>): void;
   negative?: boolean;
 
-  precision: number;
-  thousandChar: string;
-  decimalChar: string;
+  precision?: number;
+  thousandChar?: string;
+  decimalChar?: string;
 };
 
 function verifyNumber(string: string) {
