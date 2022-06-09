@@ -9,7 +9,7 @@ module.exports = {
   refs: {
     'chromatic-published-Storybook': {
       title: 'Componentz',
-      url: 'https://chromatic.com/library?appId=61a3dfbf9c186c003a9e79f1&branch=develop',
+      url: 'https://chromatic.com/library?appId=61a3dfbf9c186c003a9e79f1&branch=main',
     },
   },
 };
