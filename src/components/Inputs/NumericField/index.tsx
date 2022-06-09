@@ -1,6 +1,6 @@
 import type { TextFieldProps } from '@mui/material';
 import { TextField } from '@mui/material';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 export interface HTMLNumericElement
   extends Omit<HTMLInputElement, 'value' | 'name'> {
@@ -11,6 +11,7 @@ export interface HTMLNumericElement
 export type NumericInputProps = Omit<TextFieldProps, 'onChange'> & {
   value?: number | string;
   onChange?(e: React.ChangeEvent<HTMLNumericElement>): void;
+  negative?: boolean;
 
   precision: number;
   thousandChar: string;
@@ -22,17 +23,23 @@ function verifyNumber(string: string) {
 
   return {
     isNumber: !isNaN(Number(numericRepresentation)),
-    numberFomart: !isNaN(Number(numericRepresentation))
+    numberFormat: !isNaN(Number(numericRepresentation))
       ? Number(numericRepresentation)
       : null,
   };
 }
 
-// TODO: support negative numbers
 function NumericField(props: NumericInputProps) {
-  const { value, precision, thousandChar, decimalChar, ...inputProps } = props;
+  const {
+    value,
+    precision = 1,
+    thousandChar = '.',
+    decimalChar = ',',
+    negative,
+    ...inputProps
+  } = props;
   const defaultValue = value === '' ? NaN : Number(value);
-
+  const [isNegative, setIsNegative] = useState(false);
   const formatter = useMemo(
     () =>
       new Intl.NumberFormat('pt-BR', {
@@ -50,6 +57,31 @@ function NumericField(props: NumericInputProps) {
     throw new Error('Thousand char should not be an empty string!');
   }
 
+  const hasValue = value !== undefined;
+  let inputDefaultValue;
+  let inputValue;
+
+  if (hasValue) {
+    if (isNaN(defaultValue) || value === '') {
+      inputValue = '';
+    } else {
+      inputValue = format(defaultValue);
+    }
+  }
+
+  if (!hasValue && !isNaN(defaultValue)) {
+    inputDefaultValue = format(defaultValue);
+  }
+
+  if (isNegative) {
+    if (inputDefaultValue && !inputDefaultValue.includes('-')) {
+      inputDefaultValue = `-${inputDefaultValue}`;
+    }
+    if (inputValue && !inputValue.includes('-')) {
+      inputValue = `-${inputValue}`;
+    }
+  }
+
   function format(number: number) {
     const result = formatter
       .format(number)
@@ -60,8 +92,6 @@ function NumericField(props: NumericInputProps) {
   }
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>): void {
-    if (e.key === ' ') e.preventDefault();
-
     if (
       e.ctrlKey ||
       e.shiftKey ||
@@ -71,9 +101,22 @@ function NumericField(props: NumericInputProps) {
       e.key === 'ArrowRight' ||
       e.key === 'ArrowLeft' ||
       e.key === 'Delete'
-    )
+    ) {
       return;
-    if (!verifyNumber(e.key).isNumber) e.preventDefault();
+    }
+
+    if (e.key === ' ') {
+      return e.preventDefault();
+    }
+
+    if (e.key === '-' && negative) {
+      setIsNegative((prev) => !prev);
+      return e.preventDefault();
+    }
+
+    if (!verifyNumber(e.key).isNumber) {
+      return e.preventDefault();
+    }
   }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>): void {
@@ -102,11 +145,15 @@ function NumericField(props: NumericInputProps) {
       return props.onChange && props.onChange(newEvent);
     }
 
-    const { isNumber, numberFomart } = verifyNumber(numericRepresentation);
+    const { isNumber, numberFormat } = verifyNumber(numericRepresentation);
 
-    if (isNumber && numberFomart !== null && numberFomart >= 0) {
-      const withPrecision = numberFomart / 10 ** precision;
+    if (isNumber && numberFormat !== null) {
+      let withPrecision = numberFormat / 10 ** precision;
       const formattedNumber = format(withPrecision);
+
+      if (withPrecision > 0 && isNegative) {
+        withPrecision = withPrecision * -1;
+      }
 
       newEvent.target.value = withPrecision;
       newEvent.currentTarget.value = withPrecision;
@@ -117,21 +164,11 @@ function NumericField(props: NumericInputProps) {
     }
   }
 
-  const hasValue = value !== undefined;
-  let inputDefaultValue;
-  let inputValue;
-
-  if (hasValue) {
-    if (isNaN(defaultValue) || value === '') {
-      inputValue = '';
-    } else {
-      inputValue = format(defaultValue);
+  useEffect(() => {
+    if (!negative) {
+      setIsNegative(false);
     }
-  }
-
-  if (!hasValue && !isNaN(defaultValue)) {
-    inputDefaultValue = format(defaultValue);
-  }
+  }, [negative]);
 
   return (
     <TextField
