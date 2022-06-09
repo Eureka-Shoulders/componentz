@@ -12,12 +12,12 @@ import {
   RadioProps,
 } from '@mui/material';
 
-export interface IRadioOption {
+export type IRadioOption = {
   name: string;
   label: string;
   radioProps?: RadioProps;
   formControlLabelProps?: FormControlLabelProps;
-}
+};
 
 export type RadioGroupProps = {
   helperText?: string | false | null;

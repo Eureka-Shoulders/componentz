@@ -27,6 +27,22 @@ class DateRangePickerStore {
     this.fieldValue = value;
   }
 
+  private setInitialValues(values: DateRange) {
+    if (values.start && values.end) {
+      this.setFieldValue(
+        `${format(values.start, 'dd/MM/yyyy')} -> ${format(
+          values.end,
+          'dd/MM/yyyy'
+        )}`
+      );
+      return;
+    }
+    if (values.start) {
+      this.setFieldValue(`${format(values.start, 'dd/MM/yyyy')}`);
+      return;
+    }
+  }
+
   setOpen(open: boolean) {
     this.open = open;
   }
@@ -34,6 +50,7 @@ class DateRangePickerStore {
   constructor(values: DateRange) {
     makeAutoObservable(this, {}, { autoBind: true });
     this.values = values;
+    this.setInitialValues(values);
   }
 
   setValues(values: DateRange) {

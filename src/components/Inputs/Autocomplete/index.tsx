@@ -8,8 +8,10 @@ import {
   TextField,
   TextFieldProps,
   createFilterOptions,
+  debounce as muiDebounce,
+  AutocompleteInputChangeReason,
 } from '@mui/material';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback } from 'react';
 
 function filterOptions<T>(options: T[], state: FilterOptionsState<T>) {
   const filteredOptions = createFilterOptions<T>();
@@ -25,6 +27,7 @@ export type AutocompleteProps<T> = {
   debounce?: number;
   onDebouncedInputChange?: (value: string) => void;
 } & Omit<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   MuiAutocompleteProps<any, true | false, true | false, true | false>,
   'renderInput'
 >;
@@ -49,24 +52,12 @@ function Autocomplete<T>({
   onDebouncedInputChange,
   ...props
 }: AutocompleteProps<T>) {
-  const [inputValue, setInputValue] = useState('');
+  const debounced = muiDebounce(
+    (value: string) => onDebouncedInputChange && onDebouncedInputChange(value),
+    debounce
+  );
 
-  useEffect(() => {
-    if (!debounce) {
-      return () => null;
-    }
-
-    const loadOptionsTimeout = setTimeout(() => {
-      if (onDebouncedInputChange) {
-        onDebouncedInputChange(inputValue);
-      }
-    }, debounce);
-
-    return () => {
-      clearTimeout(loadOptionsTimeout);
-    };
-  }, [inputValue]);
-
+  // TODO: review this
   const withCheckboxOptionRenderer = useCallback(
     (
       params: React.HTMLAttributes<HTMLLIElement>,
@@ -85,6 +76,20 @@ function Autocomplete<T>({
     []
   );
 
+  function handleInputChange(
+    event: React.SyntheticEvent,
+    value: string,
+    reason: AutocompleteInputChangeReason
+  ) {
+    if (!debounce) {
+      return props.onInputChange && props.onInputChange(event, value, reason);
+    }
+
+    if (onDebouncedInputChange) {
+      debounced(value);
+    }
+  }
+
   return (
     <MuiAutocomplete
       {...props}
@@ -92,8 +97,8 @@ function Autocomplete<T>({
       fullWidth
       filterOptions={props.filterOptions || defaultFilterOptions(buildNew)}
       loading={props.loading}
-      onInputChange={(e, value) => setInputValue(value)}
-      renderOption={checkbox ? withCheckboxOptionRenderer : undefined}
+      onInputChange={handleInputChange}
+      renderOption={checkbox ? withCheckboxOptionRenderer : props.renderOption}
       renderInput={(params) => (
         <TextField
           {...params}

@@ -2,7 +2,7 @@ name: Chromatic
 on:
   push:
     branches:
-      - develop
+      - main
   release:
     types: [created]
 jobs:
@@ -16,7 +16,7 @@ jobs:
           fetch-depth: 0
 
       - name: Install dependencies
-        run: yarn && yarn add @mui/material @mui/icons-material @mui/lab @emotion/react @emotion/styled mobx mobx-react-lite
+        run: yarn install
 
       - name: Lint
         run: yarn lint
@@ -25,3 +25,5 @@ jobs:
         uses: chromaui/action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          exitZeroOnChanges: true
+          allowConsoleErrors: true

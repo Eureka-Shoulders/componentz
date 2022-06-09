@@ -1,25 +1,25 @@
 import {
-  DatePicker as MuiDatePicker,
-  DatePickerProps as MuiDatePickerProps,
+  DateTimePicker as MuiDateTimePicker,
+  DateTimePickerProps as MuiDateTimePickerProps,
 } from '@mui/lab';
 import { TextField, TextFieldProps } from '@mui/material';
 
-export type DatePickerProps = {
+export type DateTimePickerProps = {
   label?: string;
   textFieldProps?: TextFieldProps;
   onChange: (date: unknown, keyboardInputValue: string | undefined) => void;
   value: Date | string | undefined;
-} & Omit<MuiDatePickerProps, 'renderInput' | 'onChange' | 'value'>;
+} & Omit<MuiDateTimePickerProps, 'renderInput' | 'onChange' | 'value'>;
 
-function DatePicker({
+function DateTimePicker({
   label,
   onChange,
   value,
   textFieldProps,
   ...props
-}: DatePickerProps) {
+}: DateTimePickerProps) {
   return (
-    <MuiDatePicker
+    <MuiDateTimePicker
       {...props}
       value={value}
       onChange={onChange}
@@ -31,4 +31,4 @@ function DatePicker({
   );
 }
 
-export default DatePicker;
+export default DateTimePicker;

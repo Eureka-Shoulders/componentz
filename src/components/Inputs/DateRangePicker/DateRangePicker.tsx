@@ -1,9 +1,4 @@
-import {
-  DesktopDatePickerProps,
-  LocalizationProvider,
-  LocalizationProviderProps,
-} from '@mui/lab';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import { DesktopDatePickerProps } from '@mui/lab';
 import { Popover } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import { useRef, useState } from 'react';
@@ -18,16 +13,12 @@ export type DateRangePickerProps = Omit<
 > & {
   renderInput?: DesktopDatePickerProps['renderInput'];
   onChange: (value: DateRange) => void;
-  localizationProviderProps?: Omit<LocalizationProviderProps, 'dateAdapter'>;
-  dateAdapter?: LocalizationProviderProps['dateAdapter'];
   label?: string;
   value: DateRange;
 };
 
 function DateRangePicker({
   value,
-  localizationProviderProps,
-  dateAdapter,
   label,
   onChange,
   ...props
@@ -36,10 +27,7 @@ function DateRangePicker({
   const anchorRef = useRef(null);
 
   return (
-    <LocalizationProvider
-      {...localizationProviderProps}
-      dateAdapter={dateAdapter || AdapterDateFns}
-    >
+    <>
       <DateRangeMaskedInput
         label={label}
         store={store}
@@ -52,9 +40,14 @@ function DateRangePicker({
         anchorEl={anchorRef.current}
         onClose={() => store.setOpen(false)}
       >
-        <BaseCalendarPicker onChange={onChange} value={value} store={store} />
+        <BaseCalendarPicker
+          {...props}
+          onChange={onChange}
+          value={value}
+          store={store}
+        />
       </Popover>
-    </LocalizationProvider>
+    </>
   );
 }
 
