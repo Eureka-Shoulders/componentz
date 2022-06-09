@@ -59,7 +59,7 @@ function NumericField(props: NumericInputProps) {
 
   const hasValue = value !== undefined;
   let inputDefaultValue;
-  let inputValue;
+  let inputValue: string | undefined;
 
   if (hasValue) {
     if (isNaN(defaultValue) || value === '') {
@@ -80,6 +80,9 @@ function NumericField(props: NumericInputProps) {
     if (inputValue && !inputValue.includes('-')) {
       inputValue = `-${inputValue}`;
     }
+  } else {
+    inputValue = inputValue?.replace(/^-/, '');
+    inputDefaultValue = inputDefaultValue?.replace(/^-/, '');
   }
 
   function format(number: number) {
@@ -92,16 +95,16 @@ function NumericField(props: NumericInputProps) {
   }
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>): void {
-    if (
-      e.ctrlKey ||
-      e.shiftKey ||
-      e.key === 'Backspace' ||
-      e.key === 'Enter' ||
-      e.key === 'Tab' ||
-      e.key === 'ArrowRight' ||
-      e.key === 'ArrowLeft' ||
-      e.key === 'Delete'
-    ) {
+    const allowedKeys = [
+      'Backspace',
+      'Enter',
+      'Delete',
+      'ArrowLeft',
+      'ArrowRight',
+      'Tab',
+    ];
+
+    if (e.ctrlKey || e.shiftKey || allowedKeys.includes(e.key)) {
       return;
     }
 
@@ -169,6 +172,14 @@ function NumericField(props: NumericInputProps) {
       setIsNegative(false);
     }
   }, [negative]);
+
+  useEffect(() => {
+    const { numberFormat } = verifyNumber(inputValue || '');
+
+    if (!inputValue || Math.abs(numberFormat || 0) === 0) {
+      setIsNegative(false);
+    }
+  }, [inputValue]);
 
   return (
     <TextField
