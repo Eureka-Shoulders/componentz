@@ -28,7 +28,7 @@ jobs:
           node-version: ${{ matrix.node }}
 
       - name: Install
-        run: yarn install && yarn add @mui/material @mui/icons-material @mui/lab @emotion/react @emotion/styled mobx mobx-react-lite
+        run: yarn install
 
       - name: Lint
         run: yarn lint
