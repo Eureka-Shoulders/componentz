@@ -6,8 +6,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import useUIStore from '../../hooks/useUIStore';
 import { Fragment, useState } from 'react';
-import { Page } from './types';
 import { observer } from 'mobx-react-lite';
+import { Page } from './index';
 
 interface DrawerItemProps {
   page: Page;

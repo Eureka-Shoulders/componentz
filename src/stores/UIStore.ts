@@ -1,10 +1,18 @@
 import { decorate, injectable } from 'inversify';
 import { makeAutoObservable } from 'mobx';
-import AppBarStore from './internal/AppBarStore';
-import BreadcrumbStore from './internal/BreadcrumbStore';
-import DialogStore from './internal/DialogStore';
-import SnackbarStore from './internal/SnackbarStore';
-import { UIStoreType } from './types';
+import AppBarStore, { AppBarStoreType } from './internal/AppBarStore';
+import BreadcrumbStore, {
+  BreadcrumbStoreType,
+} from './internal/BreadcrumbStore';
+import DialogStore, { DialogStoreType } from './internal/DialogStore';
+import SnackbarStore, { SnackbarStoreType } from './internal/SnackbarStore';
+
+export interface UIStoreType {
+  snackbar: SnackbarStoreType;
+  dialog: DialogStoreType;
+  breadcrumb: BreadcrumbStoreType;
+  appBar: AppBarStoreType;
+}
 
 class UIStore implements UIStoreType {
   constructor() {

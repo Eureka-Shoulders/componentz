@@ -7,11 +7,12 @@ import {
   screen,
   waitFor,
 } from '@testing-library/react';
-import { globalContainer, Snackbar } from 'index';
 import { Container } from 'inversify';
 import { Provider } from 'inversify-react';
 import Bindings from '../../containers/global.bindings';
-import { UIStoreType } from '@stores/types';
+import globalContainer from '../../containers/global.inversify';
+import Snackbar from './index';
+import { UIStoreType } from '../../stores/UIStore';
 
 jest.setTimeout(30000);
 

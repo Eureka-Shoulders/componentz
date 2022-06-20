@@ -1,11 +1,12 @@
 import 'reflect-metadata';
 import Bindings from '../../containers/global.bindings';
-import { UIStoreType } from '@stores/types';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
-import { Dialog, globalContainer } from 'index';
 import { Container } from 'inversify';
 import { Provider } from 'inversify-react';
+import globalContainer from '../../containers/global.inversify';
+import Dialog from './index';
+import { UIStoreType } from '../../stores/UIStore';
 
 describe('Dialog', () => {
   let onRejectSpy: jest.Mock;

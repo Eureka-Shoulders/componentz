@@ -1,7 +1,20 @@
-import { Page } from '@components/AppBar/types';
+import { Page } from '../../components/AppBar';
 import { makeAutoObservable } from 'mobx';
 import { ReactNode } from 'react';
-import { AppBarStoreType } from '../types';
+
+export interface AppBarStoreType {
+  pages: Page[];
+  isDrawerOpen: boolean;
+  AppBarHeaderContent?: ReactNode;
+  DrawerHeaderContent?: ReactNode;
+  onClickDrawerOption(page: Page): void;
+
+  setPages(pages: Page[]): void;
+  toggleDrawer(): void;
+  setDrawerHeaderContent(content?: ReactNode): void;
+  setAppBarHeaderContent(content?: ReactNode): void;
+  setOnClickDrawerOption(newAction: (page: Page) => void): void;
+}
 
 // TODO: Make unit tests of this store
 class AppBarStore implements AppBarStoreType {
