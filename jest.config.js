@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   moduleDirectories: ['node_modules', 'src'],
   moduleFileExtensions: ['js', 'ts', 'tsx', 'json', 'node'],
   testPathIgnorePatterns: ['/node_modules/', '/lib/'],
