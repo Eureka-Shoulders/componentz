@@ -1,16 +1,17 @@
 import 'reflect-metadata';
 
 import Bindings from '../../containers/global.bindings';
-import { UIStoreType } from '@stores/types';
 import {
   getByTestId,
   render,
   RenderResult,
   screen,
 } from '@testing-library/react';
-import { Breadcrumb, globalContainer } from 'index';
 import { Container } from 'inversify';
 import { Provider } from 'inversify-react';
+import Breadcrumbs from './index';
+import globalContainer from '../../containers/global.inversify';
+import { UIStoreType } from '../../stores/UIStore';
 
 describe('Breadcrumbs', () => {
   let onClickSpy: jest.Mock;
@@ -24,7 +25,7 @@ describe('Breadcrumbs', () => {
 
     mockedBreadcrumb = render(
       <Provider container={unitContainer}>
-        <Breadcrumb />
+        <Breadcrumbs />
       </Provider>
     );
   });

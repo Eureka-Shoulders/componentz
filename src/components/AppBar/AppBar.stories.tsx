@@ -9,7 +9,7 @@ import {
 import { Box, Typography } from '@mui/material';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useEffect } from 'react';
-import AppBar from '.';
+import AppBar from './index';
 import useUIStore from '../../hooks/useUIStore';
 
 export default {

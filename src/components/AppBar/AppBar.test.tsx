@@ -3,7 +3,6 @@ import Bindings from '../../containers/global.bindings';
 import globalContainer from '../../containers/global.inversify';
 import AppBar from './index';
 import { Dashboard } from '@mui/icons-material';
-import { UIStoreType } from '@stores/types';
 import {
   getByTestId,
   getByText,
@@ -13,6 +12,7 @@ import {
 } from '@testing-library/react';
 import { Container } from 'inversify';
 import { Provider } from 'inversify-react';
+import { UIStoreType } from '../../stores/UIStore';
 
 describe('AppBar', () => {
   let mockedAppBar: RenderResult;
