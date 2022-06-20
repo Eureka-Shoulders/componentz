@@ -1,6 +1,6 @@
 {
   "name": "@euk-labs/componentz",
-  "version": "0.5.7",
+  "version": "0.5.8",
   "type": "module",
   "exports": "./index.js",
   "types": "./index.d.ts",
