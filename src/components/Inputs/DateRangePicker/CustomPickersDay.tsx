@@ -1,4 +1,4 @@
-import { PickersDay, PickersDayProps } from '@mui/x-date-pickers';
+import { PickersDay, PickersDayProps } from '@mui/lab';
 import { darken, styled } from '@mui/material';
 
 type CustomPickersDayProps = {

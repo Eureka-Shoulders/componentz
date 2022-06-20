@@ -1,28 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import { ReactNode } from 'react';
-
-export interface DialogOptions {
-  title?: string;
-  onReject?: () => void;
-  onAccept?: () => void;
-  content?: ReactNode;
-  acceptLabel?: string;
-  rejectLabel?: string;
-}
-
-export interface DialogStoreType {
-  isOpen: boolean;
-  onReject?: () => void;
-  onAccept?: () => void;
-  title?: string;
-  content?: ReactNode;
-  acceptLabel?: string;
-  rejectLabel?: string;
-  set(options: DialogOptions): void;
-  open(): void;
-  close(): void;
-  reset(): void;
-}
+import { DialogOptions, DialogStoreType } from '../types';
 
 // TODO: Make unit tests of this store
 class DialogStore implements DialogStoreType {

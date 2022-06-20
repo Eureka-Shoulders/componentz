@@ -18,15 +18,19 @@
     "strict": true,
     "skipLibCheck": true,
     "types": ["jest"],
+    "baseUrl": "src",
+    "paths": {
+      "@containers/*": ["./containers/*"],
+      "@components": ["./components/index"],
+      "@components/*": ["./components/*"],
+      "@stores/*": ["./stores/*"],
+      "@hooks/*": ["./hooks/*"]
+    },
+
+    // Build Options
     "declaration": true,
     "declarationDir": "./lib"
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "src/tests",
-    "src/**/*.test.*",
-    "src/**/*.stories.*"
-  ]
+  "exclude": ["node_modules", "dist"]
 }

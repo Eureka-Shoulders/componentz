@@ -1,7 +1,7 @@
 import {
   DateTimePicker as MuiDateTimePicker,
   DateTimePickerProps as MuiDateTimePickerProps,
-} from '@mui/x-date-pickers';
+} from '@mui/lab';
 import { TextField, TextFieldProps } from '@mui/material';
 
 export type DateTimePickerProps = {
@@ -9,10 +9,7 @@ export type DateTimePickerProps = {
   textFieldProps?: TextFieldProps;
   onChange: (date: unknown, keyboardInputValue: string | undefined) => void;
   value: Date | string | undefined;
-} & Omit<
-  MuiDateTimePickerProps<unknown, unknown>,
-  'renderInput' | 'onChange' | 'value'
->;
+} & Omit<MuiDateTimePickerProps, 'renderInput' | 'onChange' | 'value'>;
 
 function DateTimePicker({
   label,

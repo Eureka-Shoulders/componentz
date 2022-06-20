@@ -1,17 +1,7 @@
-import { BreadcrumbPath } from '../../components/Breadcrumbs';
 import { makeAutoObservable } from 'mobx';
-
-export interface BreadcrumbStoreType {
-  paths: BreadcrumbPath[];
-  linkedPaths: BreadcrumbPath[];
-  finalPath: string | undefined;
-  onClickBreadcrumbPath: (breadcrumbPath: BreadcrumbPath) => void;
-
-  setPaths(paths: BreadcrumbPath[]): void;
-  setOnClickBreadcrumbPath(
-    newAction: (breadcrumbPath: BreadcrumbPath) => void
-  ): void;
-}
+import { last } from 'ramda';
+import { BreadcrumbPath } from '../../components/Breadcrumbs/types';
+import { BreadcrumbStoreType } from '../types';
 
 // TODO: Make unit tests of this store
 class BreadcrumbStore implements BreadcrumbStoreType {
@@ -35,8 +25,7 @@ class BreadcrumbStore implements BreadcrumbStoreType {
   }
 
   get finalPath() {
-    const last = this.paths[this.paths.length - 1];
-    return last?.label ?? '';
+    return last(this.paths)?.label ?? '';
   }
 
   get linkedPaths() {

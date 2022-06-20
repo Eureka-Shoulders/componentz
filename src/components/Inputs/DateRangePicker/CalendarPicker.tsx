@@ -1,8 +1,5 @@
 /* eslint-disable react/display-name */
-import {
-  CalendarPicker as MuiCalendarPicker,
-  PickersDayProps,
-} from '@mui/x-date-pickers';
+import { CalendarPicker as MuiCalendarPicker, PickersDayProps } from '@mui/lab';
 import { Box, darken, useTheme } from '@mui/material';
 import { format, isAfter, isBefore } from 'date-fns';
 

@@ -1,17 +1,18 @@
 /* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-var-requires */
-import rimraf from 'rimraf';
-import esbuild from 'esbuild';
-import fs from 'node:fs';
-import path from 'node:path';
+const rimraf = require('rimraf');
+const esbuild = require('esbuild');
+const fs = require('fs');
+const path = require('path');
+const tscAlias = require('tsc-alias');
 
 const distFolder = './lib';
 const sourceFolder = './src';
 const includes = new RegExp('.+\\.(ts|tsx)$');
-const excludes = new RegExp('.+\\.(stories|test)\\.(ts|tsx)$');
+const excludes = new RegExp('.+\\.stories\\.js$');
 
 function getInputs(dir, result = []) {
-  fs.readdirSync(dir).forEach((file) => {
+  fs.readdirSync(dir).forEach(function (file) {
     file = path.join(dir, file);
     const stat = fs.statSync(file);
 
@@ -25,37 +26,54 @@ function getInputs(dir, result = []) {
   return result;
 }
 
-const inputs = [
-  ...getInputs(`${sourceFolder}/components`),
-  ...getInputs(`${sourceFolder}/containers`),
-  ...getInputs(`${sourceFolder}/hooks`),
-  ...getInputs(`${sourceFolder}/stores`),
-  `${sourceFolder}/index.ts`,
-];
+const inputs = getInputs(sourceFolder);
+const commomEsbuildOptions = {
+  entryPoints: [...inputs],
+  outbase: sourceFolder,
+  jsx: 'transform',
+  jsxFactory: 'React.createElement',
+  jsxFragment: 'React.Fragment',
+  target: 'es6',
+  loader: {
+    '.json': 'json',
+    '.tsx': 'tsx',
+    '.ts': 'ts',
+  },
+  minify: true,
+  inject: ['./scripts/react-shim.js'],
+};
 
 rimraf(distFolder, async (err) => {
   if (err) console.error(err);
 
   console.time('Generating ESM output...');
   await esbuild.build({
-    entryPoints: [...inputs],
-    outbase: sourceFolder,
-    jsx: 'transform',
-    jsxFactory: 'React.createElement',
-    jsxFragment: 'React.Fragment',
-    target: 'es6',
-    loader: {
-      '.json': 'json',
-      '.tsx': 'tsx',
-      '.ts': 'ts',
-    },
+    ...commomEsbuildOptions,
     format: 'esm',
-    // minify: true,
     outdir: distFolder,
     treeShaking: true,
-    inject: ['./scripts/react-shim.js'],
   });
   console.timeEnd('Generating ESM output...');
+
+  console.time('Generating CJS output...');
+  await esbuild.build({
+    ...commomEsbuildOptions,
+    format: 'cjs',
+    outdir: distFolder + '/cjs',
+  });
+  console.timeEnd('Generating CJS output...');
+
+  await tscAlias.replaceTscAliasPaths({
+    configFile: './tsconfig.json',
+    outDir: './lib/cjs',
+    declarationDir: './lib/cjs',
+  });
+
+  await tscAlias.replaceTscAliasPaths({
+    configFile: './tsconfig.json',
+    outDir: './lib',
+    declarationDir: './lib',
+  });
 
   fs.copyFileSync(
     path.join('./package.json'),
