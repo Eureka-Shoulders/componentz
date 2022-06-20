@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import { last } from 'ramda';
-import { BreadcrumbPath } from '../../components/Breadcrumbs/types';
+import { BreadcrumbPath } from '../../components/Breadcrumbs';
 
 export interface BreadcrumbStoreType {
   paths: BreadcrumbPath[];

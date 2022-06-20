@@ -8,9 +8,22 @@ import DrawerItem from './DrawerItem';
 import { StyledAppBar } from './StyledAppBar';
 import { DrawerHeader, StyledDrawer } from './StyledDrawer';
 import Toolbar from './Toolbar';
+import { SvgIconTypeMap } from '@mui/material';
+import { OverridableComponent } from '@mui/material/OverridableComponent';
 
 export interface AppBarProps {
   children?: ReactNode;
+}
+
+type MuiIcon = OverridableComponent<SvgIconTypeMap> & { muiName: string };
+
+export interface Page {
+  label: string;
+  link: string;
+  Icon: MuiIcon | (() => JSX.Element);
+  sub?: Omit<Page, 'sub'>[];
+  drawer?: boolean;
+  disabled?: boolean;
 }
 
 const AppBar = ({ children }: AppBarProps) => {

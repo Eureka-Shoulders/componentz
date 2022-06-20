@@ -4,7 +4,12 @@ import Typography from '@mui/material/Typography';
 import useUIStore from '../../hooks/useUIStore';
 import { observer } from 'mobx-react-lite';
 import { MouseEventHandler } from 'react';
-import { BreadcrumbPath } from './types';
+
+export interface BreadcrumbPath {
+  label: string;
+  link?: string;
+  onClick?: () => void;
+}
 
 /**
  * @returns A component that displays Breadcrumbs and should be controlled by the UIStore

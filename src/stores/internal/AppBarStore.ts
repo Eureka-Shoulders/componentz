@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import { ReactNode } from 'react';
-import { Page } from '../../components/AppBar/types';
+import { Page } from '../../components/AppBar';
 
 export interface AppBarStoreType {
   pages: Page[];
