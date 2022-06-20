@@ -18,15 +18,6 @@
     "strict": true,
     "skipLibCheck": true,
     "types": ["jest"],
-    "baseUrl": "src",
-    "paths": {
-      "@containers/*": ["./containers/*"],
-      "@components": ["./components/index"],
-      "@components/*": ["./components/*"],
-      "@stores/*": ["./stores/*"],
-      "@hooks/*": ["./hooks/*"]
-    },
-
     // Build Options
     "declaration": true,
     "declarationDir": "./lib"
