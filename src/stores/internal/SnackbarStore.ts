@@ -1,6 +1,25 @@
 import { AlertColor } from '@mui/material';
 import { makeAutoObservable } from 'mobx';
-import { SnackbarOptions, SnackbarStoreType } from '../types';
+
+export interface SnackbarOptions {
+  message: string;
+  severity?: import('@mui/material').AlertColor;
+  actionLabel?: string;
+  onActionClick?(): void;
+}
+
+export interface SnackbarStoreType {
+  isOpen: boolean;
+  message: string;
+  severity?: import('@mui/material').AlertColor;
+  actionLabel?: string;
+  onActionClick?(): void;
+
+  show(options: SnackbarOptions): void;
+  close(): void;
+  reset(): void;
+  enqueueSnackbar(options: SnackbarOptions): void;
+}
 
 // TODO: Make unit tests of this store
 class SnackbarStore implements SnackbarStoreType {
