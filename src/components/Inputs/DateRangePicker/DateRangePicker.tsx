@@ -1,4 +1,4 @@
-import { DesktopDatePickerProps } from '@mui/lab';
+import { DesktopDatePickerProps } from '@mui/x-date-pickers';
 import { Popover } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import { useRef, useState } from 'react';
@@ -8,10 +8,10 @@ import DateRangeMaskedInput from './DateRangeMaskedInput';
 import DateRangePickerStore, { DateRange } from './store';
 
 export type DateRangePickerProps = Omit<
-  DesktopDatePickerProps,
+  DesktopDatePickerProps<unknown, unknown>,
   'renderInput' | 'onChange'
 > & {
-  renderInput?: DesktopDatePickerProps['renderInput'];
+  renderInput?: DesktopDatePickerProps<unknown, unknown>['renderInput'];
   onChange: (value: DateRange) => void;
   label?: string;
   value: DateRange;

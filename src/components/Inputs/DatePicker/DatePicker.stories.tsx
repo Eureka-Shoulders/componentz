@@ -1,5 +1,5 @@
-import { LocalizationProvider } from '@mui/lab';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useState } from 'react';
 import DatePicker from '.';
