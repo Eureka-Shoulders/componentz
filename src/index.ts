@@ -1,8 +1,8 @@
 // Components
-export * from './components';
+export * from './components/index';
 
 // Stores
-export * from './stores';
+export * from './stores/index';
 
 // Hooks
 export { default as useUIStore } from './hooks/useUIStore';

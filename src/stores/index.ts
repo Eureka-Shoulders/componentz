@@ -1,2 +1,2 @@
-export * from './internal';
+export * from './internal/index';
 export * from './UIStore';

@@ -1,21 +1,27 @@
-export { default as NumericField } from './NumericField';
-export * from './NumericField';
-export * from './DateRangePicker';
+export { default as NumericField } from './NumericField/index';
+export * from './NumericField/index';
+export * from './DateRangePicker/index';
 export {
   default as Autocomplete,
   type AutocompleteProps,
-} from './Autocomplete';
-export { default as Checkbox, type CheckboxProps } from './Checkbox';
-export { default as DatePicker, type DatePickerProps } from './DatePicker';
+} from './Autocomplete/index';
+export { default as Checkbox, type CheckboxProps } from './Checkbox/index';
+export {
+  default as DatePicker,
+  type DatePickerProps,
+} from './DatePicker/index';
 export {
   default as DateTimePicker,
   type DateTimePickerProps,
-} from './DateTimePicker';
-export { default as MaskedField, type MaskedFieldProps } from './MaskedField';
-export { default as PasswordField } from './PasswordField';
+} from './DateTimePicker/index';
+export {
+  default as MaskedField,
+  type MaskedFieldProps,
+} from './MaskedField/index';
+export { default as PasswordField } from './PasswordField/index';
 export {
   default as RadioGroup,
   type RadioGroupProps,
   type IRadioOption,
-} from './RadioGroup';
-export { default as Switch, type SwitchProps } from './Switch';
+} from './RadioGroup/index';
+export { default as Switch, type SwitchProps } from './Switch/index';
