@@ -1,8 +1,8 @@
+import { TextField, TextFieldProps } from '@mui/material';
 import {
   DatePicker as MuiDatePicker,
   DatePickerProps as MuiDatePickerProps,
 } from '@mui/x-date-pickers';
-import { TextField, TextFieldProps } from '@mui/material';
 
 export type DatePickerProps = {
   label?: string;
@@ -28,7 +28,17 @@ function DatePicker({
       onChange={onChange}
       label={label}
       renderInput={(params) => (
-        <TextField {...params} fullWidth {...textFieldProps} />
+        <TextField
+          {...params}
+          {...textFieldProps}
+          fullWidth
+          onBlur={(e) => {
+            textFieldProps?.onBlur && textFieldProps?.onBlur(e);
+            params.onBlur && params.onBlur(e);
+          }}
+          error={params.error || textFieldProps?.error}
+          helperText={params.helperText || textFieldProps?.helperText}
+        />
       )}
     />
   );
