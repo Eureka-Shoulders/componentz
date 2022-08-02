@@ -28,7 +28,17 @@ function DateTimePicker({
       onChange={onChange}
       label={label}
       renderInput={(params) => (
-        <TextField {...params} fullWidth {...textFieldProps} />
+        <TextField
+          {...params}
+          {...textFieldProps}
+          fullWidth
+          onBlur={(e) => {
+            textFieldProps?.onBlur && textFieldProps?.onBlur(e);
+            params.onBlur && params.onBlur(e);
+          }}
+          error={params.error || textFieldProps?.error}
+          helperText={params.helperText || textFieldProps?.helperText}
+        />
       )}
     />
   );
