@@ -48,7 +48,7 @@
     "@euk-labs/componentz": "^0.5.12",
     "@euk-labs/formix": "^0.4.5",
     "@mui/icons-material": "^5.8.4",
-    "@mui/lab": "^5.0.0-alpha.88",
+    "@mui/lab": "^5.0.0-alpha.93",
     "@mui/material": "^5.9.3",
     "@mui/x-date-pickers": "^5.0.0-beta.3",
     "@storybook/addon-actions": "^6.4.17",
