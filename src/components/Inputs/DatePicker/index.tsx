@@ -8,7 +8,7 @@ export type DatePickerProps = {
   label?: string;
   textFieldProps?: TextFieldProps;
   onChange: (date: unknown, keyboardInputValue: string | undefined) => void;
-  value: Date | string | undefined;
+  value?: Date | string | null;
 } & Omit<
   MuiDatePickerProps<unknown, unknown>,
   'renderInput' | 'onChange' | 'value'
