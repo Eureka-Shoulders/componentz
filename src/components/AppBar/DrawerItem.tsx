@@ -1,12 +1,12 @@
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
-import { ListItemButton } from '@mui/material';
+import { ListItemButton, Tooltip } from '@mui/material';
 import Collapse from '@mui/material/Collapse';
 import List from '@mui/material/List';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import useUIStore from '../../hooks/useUIStore';
-import { Fragment, useState } from 'react';
 import { observer } from 'mobx-react-lite';
+import { Fragment, useState } from 'react';
+import useUIStore from '../../hooks/useUIStore';
 import { Page } from './index';
 
 interface DrawerItemProps {
@@ -37,30 +37,33 @@ const DrawerItem = ({ page }: DrawerItemProps) => {
 
   return (
     <Fragment key={page.link}>
-      <ListItemButton
-        key={page.link}
-        sx={{ minHeight: 48, pl: 2.5 }}
-        onClick={handleClick(page, !!drawerSubPages?.length)}
-      >
-        <ListItemIcon
-          sx={{
-            minWidth: uiStore.appBar.isDrawerOpen ? 48 : 0,
-          }}
+      <Tooltip title={page.label}>
+        <ListItemButton
+          key={page.link}
+          sx={{ minHeight: 48, pl: 2.5 }}
+          onClick={handleClick(page, !!drawerSubPages?.length)}
         >
-          <page.Icon />
-        </ListItemIcon>
-        <ListItemText
-          hidden={!uiStore.appBar.isDrawerOpen}
-          primary={page.label}
-        />
-        {!!drawerSubPages?.length && uiStore.appBar.isDrawerOpen ? (
-          expanded ? (
-            <ExpandLess />
-          ) : (
-            <ExpandMore />
-          )
-        ) : null}
-      </ListItemButton>
+          <ListItemIcon
+            sx={{
+              minWidth: uiStore.appBar.isDrawerOpen ? 48 : 0,
+            }}
+          >
+            <page.Icon />
+          </ListItemIcon>
+          <ListItemText
+            hidden={!uiStore.appBar.isDrawerOpen}
+            primary={page.label}
+          />
+          {!!drawerSubPages?.length && uiStore.appBar.isDrawerOpen ? (
+            expanded ? (
+              <ExpandLess />
+            ) : (
+              <ExpandMore />
+            )
+          ) : null}
+        </ListItemButton>
+      </Tooltip>
+
       <Collapse
         in={uiStore.appBar.isDrawerOpen && expanded}
         timeout="auto"
@@ -68,19 +71,20 @@ const DrawerItem = ({ page }: DrawerItemProps) => {
       >
         <List component="div" disablePadding>
           {page.sub?.map((subPage) => (
-            <ListItemButton
-              sx={{ pl: 4 }}
-              key={subPage.link}
-              onClick={handleClick(subPage, false)}
-            >
-              <ListItemIcon>
-                <subPage.Icon />
-              </ListItemIcon>
-              <ListItemText
-                hidden={!uiStore.appBar.isDrawerOpen}
-                primary={subPage.label}
-              />
-            </ListItemButton>
+            <Tooltip title={subPage.label} key={subPage.link}>
+              <ListItemButton
+                sx={{ pl: 4 }}
+                onClick={handleClick(subPage, false)}
+              >
+                <ListItemIcon>
+                  <subPage.Icon />
+                </ListItemIcon>
+                <ListItemText
+                  hidden={!uiStore.appBar.isDrawerOpen}
+                  primary={subPage.label}
+                />
+              </ListItemButton>
+            </Tooltip>
           ))}
         </List>
       </Collapse>
