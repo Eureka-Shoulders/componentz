@@ -1,5 +1,5 @@
+import { Popover, PopoverProps } from '@mui/material';
 import { DesktopDatePickerProps } from '@mui/x-date-pickers';
-import { Popover } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import { useRef, useState } from 'react';
 
@@ -15,12 +15,14 @@ export type DateRangePickerProps = Omit<
   onChange: (value: DateRange) => void;
   label?: string;
   value: DateRange;
+  popoverProps: Omit<PopoverProps, 'open' | 'onClose'>;
 };
 
 function DateRangePicker({
   value,
   label,
   onChange,
+  popoverProps,
   ...props
 }: DateRangePickerProps) {
   const [store] = useState(() => new DateRangePickerStore(value));
@@ -36,6 +38,7 @@ function DateRangePicker({
         onChange={onChange}
       />
       <Popover
+        {...popoverProps}
         open={store.open}
         anchorEl={anchorRef.current}
         onClose={() => store.setOpen(false)}
