@@ -37,7 +37,7 @@ const DrawerItem = ({ page }: DrawerItemProps) => {
 
   return (
     <Fragment key={page.link}>
-      <Tooltip title={page.label}>
+      <Tooltip title={page.label} placement="right">
         <ListItemButton
           key={page.link}
           sx={{ minHeight: 48, pl: 2.5 }}
@@ -71,7 +71,7 @@ const DrawerItem = ({ page }: DrawerItemProps) => {
       >
         <List component="div" disablePadding>
           {page.sub?.map((subPage) => (
-            <Tooltip title={subPage.label} key={subPage.link}>
+            <Tooltip title={subPage.label} key={subPage.link} placement="right">
               <ListItemButton
                 sx={{ pl: 4 }}
                 onClick={handleClick(subPage, false)}
